@@ -1,21 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+import {createAppContainer} from 'react-navigation';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Gossip App main branch</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import SigninScreen from './screens/SigninScreen';
+import SignupScreen from './screens/SignupScreen';
+import HomeScreen from './screens/Home'
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const stackNavigator = createStackNavigator({
+
+  Signup:{
+    screen:SignupScreen,
+    navigationOptions:{
+      header:null,
+    }
   },
+  Signin:{
+    screen:SigninScreen,
+    navigationOptions:{
+      header:null,
+    }
+  },
+  Home:{
+    screen:HomeScreen,
+    navigationOptions:{
+      header:null,
+    }
+  }
+
 });
+
+const App = createAppContainer(stackNavigator);
+
+export default App;
