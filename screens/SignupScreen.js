@@ -5,7 +5,11 @@ import firebase from '../firebase/fire';
 
 import * as Google from 'expo-google-app-auth';
 import { AntDesign } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
 
+
+
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 
 
@@ -17,6 +21,24 @@ export default function SignupScreen({navigation}) {
   const [Error,setError]=useState('');
   const [googleSubmitting,setGoogleSubmitting]=useState(false);
 
+  
+  const anonymousSignin =()=>{
+
+    firebase.auth().signInAnonymously()
+  .then(() => {
+    // Signed in..
+    console.log('anon signin success');
+     navigation.navigate('Home');
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+    console.log(errorMessage);
+  });
+
+
+  } 
 
   const handleGoogleSignin=()=>{
     const config= {
@@ -43,29 +65,33 @@ export default function SignupScreen({navigation}) {
     })
   }
 
+  onLoginOrRegister = () => {
+    GoogleSignin.signIn()
+      .then((data) => {
+        // Create a new Firebase credential with the token
+        const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken);
+        // Login with the credential
+        return firebase.auth().signInWithCredential(credential);
+      })
+      .then((user) => {
 
-
-
-  const signInWithGoogle =  async() =>{
-    try {
-      const result = await Google.logInAsync({
-        behavior:'web',
-        androidClientId: '219284175146-g4ltjbim9spqhiiul2j7r7onb66b3rnh.apps.googleusercontent.com',
-        iosClientId: '219284175146-mer84s58cr8gl9t2potaglt7tehs68ul.apps.googleusercontent.com',
-        scopes: ['profile', 'email'],
+        console.log('google signin success');
+        const {email,name,photoUrl}=user;
+        console.log('google signin success');
+        setTimeout(()=> navigation.navigate('Home',{email,name,photoUrl}),1000);
+        // If you need to do anything with the user, do it here
+        // The user will be logged in automatically by the
+        // `onAuthStateChanged` listener we set up in App.js earlier
+      })
+      .catch((error) => {
+        const { code, message } = error;
+        // For details of error codes, see the docs
+        // The message contains the default Firebase string
+        // representation of the error
+        console.log(message);
       });
-  
-      if (result.type === 'success') {
-        this.onSignIn(result);
-        return result.accessToken;
-        
-      } else {
-        return { cancelled: true };
-      }
-    } catch (e) {
-      return { error: true };
-    }
   }
+
 
 
 
@@ -101,6 +127,9 @@ export default function SignupScreen({navigation}) {
       <View>
         <TouchableOpacity onPress={()=>handleGoogleSignin()}>
             <AntDesign name="google" size={24} color="black" />    
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>anonymousSignin()}>
+        <Fontisto name="persons" size={24} color="black" />    
         </TouchableOpacity>
       </View>
     </View>
