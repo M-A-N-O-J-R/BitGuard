@@ -134,7 +134,7 @@ export default function SignupScreen({navigation}) {
 
   return (
    <View style={styles.container1}> 
-   <ImageBackground source={require('../assets/bg1.jpg')} resizeMode="cover" style={styles.image}>
+   <ImageBackground source={require('../assets/bg8.jpg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
        
       <Text>SignUp</Text>
@@ -156,18 +156,30 @@ export default function SignupScreen({navigation}) {
            <Text style={styles.btnText2} >register</Text>
         </TouchableOpacity>
       </View>
-      <View>
-        <TouchableOpacity onPress={()=>handleGoogleSignin()} style={styles.icons}>
-            <AntDesign name="google" size={27} color="black" />    
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>anonymousSignin()} style={styles.icons}>
-        <MaterialCommunityIcons name="location-enter" size={27} color="black" />
+      <Text style={styles.otext}>--------------------or--------------------</Text>
+      <View style={styles.otherLogin}>
+        <View style={styles.otherLogingrp}>
+          <TouchableOpacity onPress={()=>handleGoogleSignin()} style={styles.icons}>
+            {/* <AntDesign name="google" size={27} color="black" />
+                 */}
+            <Image source={require('../assets/google.png')} style={styles.gicon}/>    
+          </TouchableOpacity>
+          <Text style={styles.otext}>Google</Text>
+        </View>
+        <View style={styles.otherLogingrp}>
+          <TouchableOpacity onPress={()=>anonymousSignin()} style={styles.icons}>
+            <MaterialCommunityIcons name="location-enter" size={27} color="black" />
+          
+          </TouchableOpacity>
+          <Text style={styles.otext}>Anonymous</Text>
+        </View>
+        <View style={styles.otherLogingrp}>
+          <TouchableOpacity onPress={()=>{}} style={styles.icons2}>
+            <Fontisto name="mobile" size={27} color="black" />
+          </TouchableOpacity>
+          <Text style={styles.otext}>Number</Text>
+        </View>
         
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{}} style={styles.icons2}>
-        <Fontisto name="mobile" size={27} color="black" />
-        
-        </TouchableOpacity>
       </View>
       
     </View>
@@ -181,11 +193,13 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: 'yellow',
     alignItems: 'center',
-    justifyContent:'center'
+    justifyContent:'center',
+    width: '100%',
 
   },
   container1: {
     flex: 1,
+    width: '100%',
   },
   btnContainer:{
 
@@ -211,7 +225,7 @@ const styles = StyleSheet.create({
     width:'80%',
     backgroundColor: 'black',
     borderRadius:5,
-    marginBottom:20,
+    marginBottom:30,
 
   },
   btnText2:{
@@ -237,7 +251,32 @@ const styles = StyleSheet.create({
   icons2: {
     backgroundColor:'white',
     padding:6,
-    borderRadius:50,
+    borderRadius:20,
+    height:40,
+    width:40,
+    alignItems: 'center'
+  },
+  otherLogin:
+  {
+    flexDirection:'row',
+    marginTop:30,
+    width:'80%',
+    justifyContent:'space-around',
     alignItems: 'center',
-  }
+    padding:20,
+  },
+  otherLogingrp:
+  {
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems: 'center',
+  },
+  otext:
+  {
+    color: 'black',
+    fontWeight:'400',
+    marginTop:3,
+  },
+  
+
 });
