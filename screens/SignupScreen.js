@@ -1,17 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import { StyleSheet, Text, View ,TextInput,TouchableOpacity,Button,KeyboardAvoidingView} from 'react-native';
+import { Image,ImageBackground,StyleSheet, Text, View ,TextInput,TouchableOpacity,Button,KeyboardAvoidingView} from 'react-native';
 import firebase from '../firebase/fire';
+
+import ImageResizeMode from 'react-native/Libraries/Image/ImageResizeMode'
 
 import * as Google from 'expo-google-app-auth';
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 import { getAuth, signInAnonymously } from "firebase/auth";
 
-
+const image = { uri: "https://hazlitt.net/sites/default/files/styles/article-header-image/public/field/image/gossip-illo-web.jpg?itok=ELA1gHGp" };
 
 
 export default function SignupScreen({navigation}) {
@@ -104,7 +106,10 @@ export default function SignupScreen({navigation}) {
   
 
   return (
+   <View style={styles.container1}> 
+   <ImageBackground source={require('../assets/bg1.jpg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
+       
       <Text>SignUp</Text>
       <KeyboardAvoidingView
        behavior="padding"
@@ -126,23 +131,30 @@ export default function SignupScreen({navigation}) {
       </View>
       <View>
         <TouchableOpacity onPress={()=>handleGoogleSignin()}>
-            <AntDesign name="google" size={24} color="black" />    
+            <AntDesign name="google" size={24} color="white" />    
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>anonymousSignin()}>
-        <Fontisto name="persons" size={24} color="black" />    
+        <TouchableOpacity onPress={()=>anonymousSignin()} style={styles.icons}>
+        <MaterialCommunityIcons name="location-enter" size={24} color="black" />
+        
         </TouchableOpacity>
       </View>
+      
     </View>
+    </ImageBackground>
+    </View> 
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent:'center'
 
+  },
+  container1: {
+    flex: 1,
   },
   btnContainer:{
 
@@ -180,6 +192,16 @@ const styles = StyleSheet.create({
     color: 'red',
     marginTop:5,
     borderRadius:5,
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+  
+  },
+  icons: {
+    backgroundColor:'white',
+    padding:4,
+    borderRadius:50,
   }
    
 });
