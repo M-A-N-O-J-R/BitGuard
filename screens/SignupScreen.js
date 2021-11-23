@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
 import { Image,ImageBackground,StyleSheet, Text, View ,TextInput,TouchableOpacity,Button,KeyboardAvoidingView} from 'react-native';
+
 import firebase from '../firebase/fire';
+import Firebase from 'firebase'
+
 
 import ImageResizeMode from 'react-native/Libraries/Image/ImageResizeMode'
 
@@ -55,6 +58,15 @@ export default function SignupScreen({navigation}) {
       {
         const {email,name,photoUrl}=user;
         console.log('google signin success');
+        const credential = Firebase.auth.GoogleAuthProvider.credential( //Set the tokens to Firebase
+          result.idToken,
+          result.accessToken
+        );
+        firebase.auth()
+          .signInWithCredential(credential) //Login to Firebase
+          .catch((error) => {
+            console.log(error);
+          });
         setTimeout(()=> navigation.navigate('Home',{email,name,photoUrl}),1000);
       }
       else
@@ -67,31 +79,46 @@ export default function SignupScreen({navigation}) {
     })
   }
 
-  onLoginOrRegister = () => {
-    GoogleSignin.signIn()
-      .then((data) => {
-        // Create a new Firebase credential with the token
-        const credential = firebase.auth.GoogleAuthProvider.credential(data.idToken, data.accessToken);
-        // Login with the credential
-        return firebase.auth().signInWithCredential(credential);
-      })
-      .then((user) => {
-
-        console.log('google signin success');
-        const {email,name,photoUrl}=user;
-        console.log('google signin success');
-        setTimeout(()=> navigation.navigate('Home',{email,name,photoUrl}),1000);
-        // If you need to do anything with the user, do it here
-        // The user will be logged in automatically by the
-        // `onAuthStateChanged` listener we set up in App.js earlier
-      })
-      .catch((error) => {
-        const { code, message } = error;
-        // For details of error codes, see the docs
-        // The message contains the default Firebase string
-        // representation of the error
-        console.log(message);
-      });
+  const isUserEqual=(googleUser, firebaseUser)=> {
+    if (firebaseUser) {
+      var providerData = firebaseUser.providerData;
+      for (var i = 0; i < providerData.length; i++) {
+        if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+            providerData[i].uid === googleUser.getBasicProfile().getId()) {
+          // We don't need to reauth the Firebase connection.
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
+  const onSignIn=(googleUser) => {
+    console.log('Google Auth Response', googleUser);
+    // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+    var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
+      unsubscribe();
+      // Check if we are already signed-in Firebase with the correct user.
+      if (!isUserEqual(googleUser, firebaseUser)) {
+        // Build Firebase credential with the Google ID token.
+        var credential = firebase.auth.GoogleAuthProvider.credential(
+            googleUser.getAuthResponse().id_token);
+  
+        // Sign in with credential from the Google user.
+        firebase.auth().signInWithCredential(credential).catch((error) => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+        });
+      } else {
+        console.log('User already signed-in Firebase.');
+      }
+    });
   }
 
 
@@ -130,11 +157,15 @@ export default function SignupScreen({navigation}) {
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity onPress={()=>handleGoogleSignin()}>
-            <AntDesign name="google" size={24} color="white" />    
+        <TouchableOpacity onPress={()=>handleGoogleSignin()} style={styles.icons}>
+            <AntDesign name="google" size={27} color="black" />    
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>anonymousSignin()} style={styles.icons}>
-        <MaterialCommunityIcons name="location-enter" size={24} color="black" />
+        <MaterialCommunityIcons name="location-enter" size={27} color="black" />
+        
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>{}} style={styles.icons2}>
+        <Fontisto name="mobile" size={27} color="black" />
         
         </TouchableOpacity>
       </View>
@@ -200,8 +231,13 @@ const styles = StyleSheet.create({
   },
   icons: {
     backgroundColor:'white',
-    padding:4,
+    padding:6,
     borderRadius:50,
+  },
+  icons2: {
+    backgroundColor:'white',
+    padding:6,
+    borderRadius:50,
+    alignItems: 'center',
   }
-   
 });
