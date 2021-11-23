@@ -10,7 +10,7 @@ import ImageResizeMode from 'react-native/Libraries/Image/ImageResizeMode'
 
 import * as Google from 'expo-google-app-auth';
 import { AntDesign } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons';
+import { Fontisto,Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
@@ -21,8 +21,6 @@ const image = { uri: "https://hazlitt.net/sites/default/files/styles/article-hea
 
 export default function SignupScreen({navigation}) {
   
-  const [email,setEmail]=useState("");
-  const [password,setPassword]=useState("");
   const [Error,setError]=useState('');
  
 
@@ -150,21 +148,51 @@ export default function SignupScreen({navigation}) {
       <Text>SignUp</Text>
       <KeyboardAvoidingView
        behavior="padding"
-      >
-      <TextInput placeholder="Enter the user Mail" value={email} onChangeText={(text)=>
-        {
-          setEmail(text.trim());
-        }
-      } style={styles.input}></TextInput>
-      <TextInput placeholder="Enter the user Password" value={password} onChangeText={(text)=>setPassword(text)} style={styles.input} secureTextEntry></TextInput>
+       style={styles.numberCont}>
+            <Image source={require('../assets/india2.png')} style={styles.numCode}/>
+            <Text>+91</Text>   
+        
+        <TextInput 
+            placeholder="Enter Phone Number" 
+            value={phoneNumber} 
+            onChangeText={(number) =>
+                {
+                  if(number.length>10)
+                  {
+                    number = number.slice(0, -1); 
+                  }
+                  setPhoneNumber(number.trim());
+                }
+                } 
+            style={styles.input}
+            keyboardType="phone-pad"
+
+        ></TextInput>
+      
+      {/* <TextInput placeholder="Enter the user Password" value={password} onChangeText={(text)=>setPassword(text)} style={styles.input} secureTextEntry></TextInput> */}
       </KeyboardAvoidingView>
       <View style={styles.btnContainer}>
-        <TouchableOpacity onPress={()=>{}} style={styles.button}>
+        {/* <TouchableOpacity onPress={()=>{}} style={styles.button}>
            <Text style={styles.btnText}>Login</Text>
+        </TouchableOpacity> */}
+        <TouchableOpacity onPress={()=>{sentVerification()}} style={styles.button2}>
+           <Text style={styles.btnText2} >Send OTP</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{signUp()}} style={styles.button2}>
-           <Text style={styles.btnText2} >register</Text>
+      </View>
+      <TextInput
+        placeholder="Confirmation Code"
+        onChangeText={(text)=>{
+            setCode(text);
+        }}
+        value={code}
+        keyboardType="number-pad"/>
+        <View style={styles.btnContainer}>
+        <TouchableOpacity onPress={()=>{confirmCode()}} style={styles.button}>
+           <Text style={styles.btnText}>Confirm Code</Text>
         </TouchableOpacity>
+        {/* <TouchableOpacity onPress={()=>{sentVerification()}} style={styles.button2}>
+           <Text style={styles.btnText2} >Send OTP</Text>
+        </TouchableOpacity> */}
       </View>
       <Text style={styles.otext}>--------------------or--------------------</Text>
       <View style={styles.otherLogin}>
@@ -184,12 +212,11 @@ export default function SignupScreen({navigation}) {
           <Text style={styles.otext}>Anonymous</Text>
         </View>
         <View style={styles.otherLogingrp}>
-          <TouchableOpacity onPress={()=>{navigation.navigate('Number')}} style={styles.icons2}>
-          <AntDesign name="mobile1" size={23} color="black" />
+          <TouchableOpacity onPress={()=>{navigation.navigate('Signup')}} style={styles.icons}>
+          <Ionicons name="mail-open-outline" size={24} color="black" />
           </TouchableOpacity>
-          <Text style={styles.otext}>Number</Text>
+          <Text style={styles.otext}>Email</Text>
         </View>
-        
       </View>
       
     </View>
@@ -245,8 +272,11 @@ const styles = StyleSheet.create({
     padding:10,
     backgroundColor: 'white',
     color: 'red',
-    marginTop:5,
     borderRadius:5,
+    width:'70%',
+    marginLeft:10,
+    fontWeight:'500',
+      fontSize:15
   },
   image: {
     flex: 1,
@@ -264,8 +294,7 @@ const styles = StyleSheet.create({
     borderRadius:20,
     height:40,
     width:40,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'center'
   },
   otherLogin:
   {
@@ -288,6 +317,25 @@ const styles = StyleSheet.create({
     fontWeight:'400',
     marginTop:3,
   },
-  
+  numberCont:
+  {
+      
+      width:'70%',
+      backgroundColor: 'white',
+      alignItems: 'center',
+      flexDirection:'row',
+      marginTop:5,
+      borderRadius:5,
+      fontWeight:'500',
+      fontSize:70,
+      
+  },
+  numCode:
+  {
+      borderRadius:15,
+      marginRight:3,
+      marginLeft:10,
+      
+  }
 
 });
