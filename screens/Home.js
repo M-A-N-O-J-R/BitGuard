@@ -2,41 +2,68 @@ import { StatusBar } from 'expo-status-bar';
 import React,{useEffect,useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import firebase from '../firebase/fire'
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { Feather,AntDesign } from '@expo/vector-icons';
+
+import Global from './Global';
 
 
-
-
-export default function App() {
-
-  const [id,setId]=useState("");
-
-  useEffect(() => 
-  {
-    firebase.auth().onAuthStateChanged((user) => {
-      console.log("user read");
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        var uid = user.uid;
-        console.log(uid);
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        console.log('user is  signed out');
-      }
-    });
-  },[]);
-  
-
+function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
     </View>
   );
 }
 
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
+
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer independent={true}>
+      <Tab.Navigator
+          
+          tabBarOptions={
+          {
+           
+            labelStyle: 
+            {
+              fontSize: 12,
+            },
+			    }}
+          screenOptions={{headerShown:false}}>
+        <Tab.Screen name="Home" 
+         options={{
+            tabBarIcon: ({ color, size }) => (
+              <Feather name="globe" size={24} color="black" />
+            )
+            
+          }}
+        >
+          {()=> <Global/>}
+        </Tab.Screen>
+        <Tab.Screen name="Settings" 
+         options={{
+           tabBarIcon:({ color,size})=>(
+            <AntDesign name="setting" size={24} color="black" />
+           )
+         }}
+        component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
 
 
 
