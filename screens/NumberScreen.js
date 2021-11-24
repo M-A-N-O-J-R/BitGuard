@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React,{useState} from 'react';
+import React,{useState,useRef} from 'react';
 import { Image,ImageBackground,StyleSheet, Text, View ,TextInput,TouchableOpacity,Button,KeyboardAvoidingView} from 'react-native';
 
 import firebase from '../firebase/fire';
@@ -12,7 +12,7 @@ import * as Google from 'expo-google-app-auth';
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto,Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 
 import { getAuth, signInAnonymously } from "firebase/auth";
 
@@ -25,14 +25,33 @@ export default function SignupScreen({navigation}) {
  
 
   const [phoneNumber,setPhoneNumber]=useState('');
+  const [phoneNumber2,setPhoneNumber2]=useState('');
   const [code,setCode] = useState('');
+  const [verificationId, setVerificationId] = useState(null);
+  const recaptchaVerifier = useRef(null);
 
   const sentVerification=()=>{
+
+    const phoneProvider = new firebase.auth.PhoneAuthProvider();
+    phoneProvider.verifyPhoneNumber(phoneNumber2,recaptchaVerifier.current).then(setVerificationId).
+    catch((err)=>{
+        console.error(err.message);
+    })
 
   };
 
   const confirmCode=()=>{
-
+    const credential = firebase.auth.PhoneAuthProvider.credential(
+        verificationId,
+        code
+      );
+        firebase.auth().signInWithCredential(credential).then((result)=>{
+            console.log('phone login success');
+            navigation.navigate('Home');
+            
+        }).catch((err)=>{
+            console.error(err.message);
+        });
   };
   
   const anonymousSignin =()=>{
@@ -141,7 +160,20 @@ export default function SignupScreen({navigation}) {
   
 
   return (
-   <View style={styles.container1}> 
+   <View style={styles.container1}>
+    <FirebaseRecaptchaVerifierModal
+          ref={recaptchaVerifier}
+          firebaseConfig={
+         {
+            apiKey: "AIzaSyA5JabX3yv5cRMqEwF6Ebq-VBfDLxuN5lk",
+            authDomain: "gossip-5f3ba.firebaseapp.com",
+            projectId: "gossip-5f3ba",
+            storageBucket: "gossip-5f3ba.appspot.com",
+            messagingSenderId: "219284175146",
+            appId: "1:219284175146:web:6b73f55a8dc68a36de0653",
+            measurementId: "G-3XMB7CL2W0"
+        }}
+        /> 
    <ImageBackground source={require('../assets/bg8.jpg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
        
@@ -161,6 +193,7 @@ export default function SignupScreen({navigation}) {
                   {
                     number = number.slice(0, -1); 
                   }
+                  //console.log(number);
                   setPhoneNumber(number.trim());
                 }
                 } 
@@ -175,7 +208,14 @@ export default function SignupScreen({navigation}) {
         {/* <TouchableOpacity onPress={()=>{}} style={styles.button}>
            <Text style={styles.btnText}>Login</Text>
         </TouchableOpacity> */}
-        <TouchableOpacity onPress={()=>{sentVerification()}} style={styles.button2}>
+        <TouchableOpacity onPress={()=>{
+            let num ='+91'+phoneNumber;
+            num=num.trim();
+            console.log(num);
+            setPhoneNumber2(num);
+            console.log(phoneNumber2);
+            sentVerification()
+            }} style={styles.button2}>
            <Text style={styles.btnText2} >Send OTP</Text>
         </TouchableOpacity>
       </View>
@@ -271,12 +311,11 @@ const styles = StyleSheet.create({
   input:{
     padding:10,
     backgroundColor: 'white',
-    color: 'red',
     borderRadius:5,
     width:'70%',
     marginLeft:10,
     fontWeight:'500',
-      fontSize:15
+    fontSize:15
   },
   image: {
     flex: 1,
