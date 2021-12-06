@@ -5,9 +5,10 @@ import firebase from '../firebase/fire'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Feather,AntDesign } from '@expo/vector-icons';
+import { Feather,AntDesign,Ionicons } from '@expo/vector-icons';
 
 import Global from './Global';
+import New from './NewItem';
 
 
 function HomeScreen() {
@@ -52,6 +53,16 @@ export default function App() {
           }}
         >
           {()=> <Global/>}
+        </Tab.Screen>
+        <Tab.Screen name="New" 
+         options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="add-outline" size={24} color="black" />
+            )
+            
+          }}
+        >
+          {()=> <New/>}
         </Tab.Screen>
         <Tab.Screen name="Settings" 
          options={{

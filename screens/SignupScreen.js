@@ -11,11 +11,20 @@ import ImageResizeMode from 'react-native/Libraries/Image/ImageResizeMode'
 import * as Google from 'expo-google-app-auth';
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons,Ionicons } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 
 import { getAuth, signInAnonymously } from "firebase/auth";
-
+import { 
+  Oswald_200ExtraLight,
+  Oswald_300Light,
+  Oswald_400Regular,
+  Oswald_500Medium,
+  Oswald_600SemiBold,
+  Oswald_700Bold 
+} from '@expo-google-fonts/oswald'
 const image = { uri: "https://hazlitt.net/sites/default/files/styles/article-header-image/public/field/image/gossip-illo-web.jpg?itok=ELA1gHGp" };
 
 
@@ -136,34 +145,55 @@ export default function SignupScreen({navigation}) {
 
   const signUp = async()=>{
     
-    firebase.auth().createUserWithEmailAndPassword(email,password).then(()=>{
+    firebase.auth().createUserWithEmailAndPassword(email,password).then(()=>{firebase.auth().signInWithEmailAndPassword(email,password)}).then(()=>{
       navigation.navigate('Home');
     }).catch((err)=>{console.log(err.message)});
   } 
-  
+  let [fontsLoaded,error]= useFonts({
+  Oswald_200ExtraLight,
+  Oswald_300Light,
+  Oswald_400Regular,
+  Oswald_500Medium,
+  Oswald_600SemiBold,
+  Oswald_700Bold 
+});
+if(!fontsLoaded)
+{
+    return<AppLoading/>
+}    
 
   return (
    <View style={styles.container1}> 
    <ImageBackground source={require('../assets/bg8.jpg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
        
-      <Text>SignUp</Text>
+    <Text style={styles.HeaderText}>Gossip..</Text>
       <KeyboardAvoidingView
-       behavior="padding"
+       behavior="padding" style={styles.container2}
       >
-      <TextInput placeholder="Enter the user Mail" value={email} onChangeText={(text)=>
-        {
-          setEmail(text.trim());
-        }
-      } style={styles.input}></TextInput>
-      <TextInput placeholder="Enter the user Password" value={password} onChangeText={(text)=>setPassword(text)} style={styles.input} secureTextEntry></TextInput>
+      <View style={styles.inputCont}>
+      <Ionicons name="mail-open-outline" size={24} color="black" style={styles.icones}/>
+        <TextInput placeholder="Enter the User Mail" value={email} onChangeText={(text)=>
+          {
+            setEmail(text.trim());
+          }
+        } style={styles.input}></TextInput>
+      </View>
+      
+      <View style={styles.inputCont}>
+      <MaterialCommunityIcons name="form-textbox-password" size={24} color="black" style={styles.icones} />
+      <TextInput placeholder="Enter the User Password" value={password} onChangeText={(text)=>setPassword(text)} style={styles.input} secureTextEntry></TextInput>
+      </View>
       </KeyboardAvoidingView>
       <View style={styles.btnContainer}>
-        <TouchableOpacity onPress={()=>{}} style={styles.button}>
+        {/* <TouchableOpacity onPress={()=>{}} style={styles.button}>
            <Text style={styles.btnText}>Login</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity onPress={()=>{signUp()}} style={styles.button2}>
            <Text style={styles.btnText2} >register</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>{navigation.navigate('Signin')}}>
+           <Text style={styles.link}>Already have an account? </Text>
         </TouchableOpacity>
       </View>
       <Text style={styles.otext}>--------------------or--------------------</Text>
@@ -199,6 +229,26 @@ export default function SignupScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  link:
+  {
+    color:'rgb(0,149,247)',
+    marginBottom:20,
+  },
+  icones:{
+    marginLeft:17,
+  },
+  inputCont:
+  {
+    backgroundColor:'white',
+    width:'70%',
+    marginTop:12,
+    flexDirection:'row',
+    alignItems: 'center',
+    borderRadius:7,
+    justifyContent: 'flex-start',
+    borderColor: 'black',
+    
+  },
   container: {
     flex: 1,
     // backgroundColor: 'yellow',
@@ -210,6 +260,10 @@ const styles = StyleSheet.create({
   container1: {
     flex: 1,
     width: '100%',
+  },
+  container2: {
+    width: '100%',
+    alignItems: 'center',
   },
   btnContainer:{
 
@@ -236,7 +290,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     borderRadius:5,
     marginBottom:30,
-
+    marginTop:10,
   },
   btnText2:{
     color: 'white',
@@ -244,9 +298,12 @@ const styles = StyleSheet.create({
   input:{
     padding:10,
     backgroundColor: 'white',
-    color: 'red',
-    marginTop:5,
+    color: 'black',
     borderRadius:5,
+    marginLeft:"5%",
+    fontSize:15,
+    width:"80%",
+    
   },
   image: {
     flex: 1,
@@ -288,6 +345,13 @@ const styles = StyleSheet.create({
     fontWeight:'400',
     marginTop:3,
   },
-  
-
+  HeaderText:
+  {
+    fontSize:53,
+    marginTop:60,
+    marginBottom:40,
+    fontFamily:'Satisfy_400Regular',
+    color:'rgb(51,51,51)',
+    letterSpacing:2,
+  },
 });

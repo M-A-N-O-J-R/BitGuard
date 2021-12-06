@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React,{useState,useRef} from 'react';
+import React,{useState,useRef,useEffect} from 'react';
 import { Image,ImageBackground,StyleSheet, Text, View ,TextInput,TouchableOpacity,Button,KeyboardAvoidingView} from 'react-native';
 
 import firebase from '../firebase/fire';
@@ -35,10 +35,18 @@ import {
 const image = { uri: "https://hazlitt.net/sites/default/files/styles/article-header-image/public/field/image/gossip-illo-web.jpg?itok=ELA1gHGp" };
 
 
-export default function SignupScreen({navigation}) {
+export default function SignupScreen({route,navigation}) {
   
   const [Error,setError]=useState('');
- 
+  
+  const { number,id} = route.params;
+
+  const[d1,setD1]=useState('');
+  const[d2,setD2]=useState('');
+  const[d3,setD3]=useState('');
+  const[d4,setD4]=useState('');
+  const[d5,setD5]=useState('');
+  const[d6,setD6]=useState('');
 
   const [phoneNumber,setPhoneNumber]=useState('');
   const [phoneNumber2,setPhoneNumber2]=useState('');
@@ -46,25 +54,25 @@ export default function SignupScreen({navigation}) {
   const [verificationId, setVerificationId] = useState(null);
   const recaptchaVerifier = useRef(null);
 
-  const sentVerification=()=>{
+  
+  useEffect(() => {
+    if (code !== '') 
+    {
+      // Make API call to /beer
+      confirmCode();
+    } else {
+      // Throw error 404, beer not found
+      console.log('waiting');
+    }
+  }, [code]);
 
-    
-    const phoneProvider = new firebase.auth.PhoneAuthProvider();
-   // navigation.navigate('Home');
-    phoneProvider.verifyPhoneNumber(phoneNumber2,recaptchaVerifier.current).then((id)=>{
-      setVerificationId(id)
-      navigation.navigate('OTP',{number:phoneNumber2,id:id})
-
-    }).
-    catch((err)=>{
-        console.error(err.message);
-    })
-
-  };
-
+  const confirmCode2=()=>{
+    setCode((d1+d2+d3+d4+d5+d6));
+  }
   const confirmCode=()=>{
+    
     const credential = firebase.auth.PhoneAuthProvider.credential(
-        verificationId,
+        id,
         code
       );
         firebase.auth().signInWithCredential(credential).then((result)=>{
@@ -195,7 +203,7 @@ export default function SignupScreen({navigation}) {
   }    
 
   return (
-   <KeyboardAvoidingView style={styles.container1}>
+   <View style={styles.container1}>
     <FirebaseRecaptchaVerifierModal
           ref={recaptchaVerifier}
           firebaseConfig={
@@ -212,98 +220,155 @@ export default function SignupScreen({navigation}) {
    <ImageBackground source={require('../assets/bg8.jpg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
        
-    <Text style={styles.HeaderText}>Gossip..</Text>
-      <KeyboardAvoidingView
-       behavior="padding"
-       style={styles.numberCont}>
-            <Image source={require('../assets/india2.png')} style={styles.numCode}/>
-            <Text>+91</Text>   
-        
-        <TextInput 
-            placeholder="Enter Phone Number" 
-            value={phoneNumber} 
-            onChangeText={(number) =>
-                {
-                  if(number.length>10)
+    {/* <Text style={styles.HeaderText}>Gossip..</Text> */}
+      <View style={styles.verification}>
+        <Text style={styles.text1}>Verification</Text>
+        <Text>Enter OTP code sent to your number {number}</Text>
+        <View style={styles.otpCode}>
+            <TextInput
+            style={styles.digit}
+            placeholder="0"
+            onChangeText={(digit)=>{
+              if(digit.length>1)
                   {
-                    number = number.slice(0, -1); 
+                    digit = digit.slice(0, -1); 
                   }
                   //console.log(number);
-                  setPhoneNumber(number.trim());
-                }
-                } 
-            style={styles.input}
-            keyboardType="phone-pad"
+              setD1(digit.trim());
+            }}
+            value={d1}
+            keyboardType="number-pad"/> 
 
-        ></TextInput>
-      
-      {/* <TextInput placeholder="Enter the user Password" value={password} onChangeText={(text)=>setPassword(text)} style={styles.input} secureTextEntry></TextInput> */}
-      </KeyboardAvoidingView>
-      <View style={styles.btnContainer}>
-        {/* <TouchableOpacity onPress={()=>{}} style={styles.button}>
-           <Text style={styles.btnText}>Login</Text>
-        </TouchableOpacity> */}
-        <TouchableOpacity onPress={()=>{
-            let num ='+91'+phoneNumber;
-            num=num.trim();
-            console.log(num);
-            setPhoneNumber2(num);
-            console.log(phoneNumber2);
-            sentVerification()
-            }} style={styles.button2}>
-           <Text style={styles.btnText2} >Send OTP</Text>
-        </TouchableOpacity>
-      </View>
-      <TextInput
-        placeholder="Confirmation Code"
-        onChangeText={(text)=>{
-            setCode(text);
-        }}
-        value={code}
-        keyboardType="number-pad"/>
+
+          <TextInput
+          style={styles.digit}
+          placeholder="0"
+          onChangeText={(digit)=>{
+              if(digit.length>1)
+                  {
+                    digit = digit.slice(0, -1); 
+                  }
+                  //console.log(number);
+              setD2(digit.trim());
+            }}
+          value={d2}
+          keyboardType="number-pad"/> 
+
+
+
+<TextInput
+          style={styles.digit}
+          placeholder="0"
+          onChangeText={(digit)=>{
+              if(digit.length>1)
+                  {
+                    digit = digit.slice(0, -1); 
+                  }
+                  //console.log(number);
+              setD3(digit.trim());
+            }}
+          value={d3}
+          keyboardType="number-pad"/>   
+
+
+<TextInput
+          style={styles.digit}
+          placeholder="0"
+          onChangeText={(digit)=>{
+              if(digit.length>1)
+                  {
+                    digit = digit.slice(0, -1); 
+                  }
+                  //console.log(number);
+              setD4(digit.trim());
+            }}
+          value={d4}
+          keyboardType="number-pad"/> 
+
+<TextInput
+          style={styles.digit}
+          placeholder="0"
+          onChangeText={(digit)=>{
+              if(digit.length>1)
+                  {
+                    digit = digit.slice(0, -1); 
+                  }
+                  //console.log(number);
+              setD5(digit.trim());
+            }}
+          value={d5}
+          keyboardType="number-pad"/> 
+
+
+<TextInput
+          style={styles.digit}
+          placeholder="0"
+          onChangeText={(digit)=>{
+              if(digit.length>1)
+                  {
+                    digit = digit.slice(0, -1); 
+                  }
+                  //console.log(number);
+              setD6(digit.trim());
+              
+            }}
+          value={d6}
+          
+          keyboardType="number-pad"/>    
+        </View>
+
+        <Text>{number}</Text>
+        <Text>{code}</Text>
+        <Text>{id}</Text>    
+</View>
         <View style={styles.btnContainer}>
-        <TouchableOpacity onPress={()=>{navigation.navigate('OTP',{
-            number:phoneNumber,
-            otherParam: 'anything you want here',
-          })}} style={styles.button}>
-           <Text style={styles.btnText}>Confirm Code</Text>
+        <TouchableOpacity onPress={()=>{confirmCode2()}} style={styles.button2}>
+           <Text style={styles.btnText2}>Confirm Code</Text>
+           <AntDesign name="arrowright" size={24} color="white" />
         </TouchableOpacity>
+        
         {/* <TouchableOpacity onPress={()=>{sentVerification()}} style={styles.button2}>
            <Text style={styles.btnText2} >Send OTP</Text>
         </TouchableOpacity> */}
       </View>
-      <Text style={styles.otext}>--------------------or--------------------</Text>
-      <View style={styles.otherLogin}>
-        <View style={styles.otherLogingrp}>
-          <TouchableOpacity onPress={()=>handleGoogleSignin()} style={styles.icons}>
-            {/* <AntDesign name="google" size={27} color="black" />
-                 */}
-            <Image source={require('../assets/google.png')} style={styles.gicon}/>    
-          </TouchableOpacity>
-          <Text style={styles.otext}>Google</Text>
-        </View>
-        <View style={styles.otherLogingrp}>
-          <TouchableOpacity onPress={()=>anonymousSignin()} style={styles.icons}>
-            <MaterialCommunityIcons name="location-enter" size={27} color="black" />
-          
-          </TouchableOpacity>
-          <Text style={styles.otext}>Anonymous</Text>
-        </View>
-        <View style={styles.otherLogingrp}>
-          <TouchableOpacity onPress={()=>{navigation.navigate('Signup')}} style={styles.icons}>
-          <Ionicons name="mail-open-outline" size={24} color="black" />
-          </TouchableOpacity>
-          <Text style={styles.otext}>Email</Text>
-        </View>
-      </View>
+      
       
     </View>
     </ImageBackground>
-    </KeyboardAvoidingView> 
+    </View> 
   );
 }
 
 const styles = StyleSheet.create({
+  verification:
+  {
+    marginBottom:"130%",
+
+  },
+  text1: {
+    fontWeight:"bold",
+    fontSize:17,
+  },
+  otpCode:
+  {
+    padding:10,
+    width:'80%',
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems: 'center',
+  },
+  digit:
+  {
+    backgroundColor:'#eee',
+    padding:10,
+    borderRadius:5,
+    width:'16%',
+    textAlign:'center',
+    fontSize:16,
+    marginLeft:10,
+    borderColor:'black',
+    borderWidth:1,
+  },
   container: {
     flex: 1,
     // backgroundColor: 'yellow',
@@ -318,33 +383,25 @@ const styles = StyleSheet.create({
   },
   btnContainer:{
 
-    width:'60%',
-    alignItems: 'center',
-    marginTop:20,
-  },
-  button:
-  {
-    padding:15,
-    alignItems:'center',
     width:'80%',
-    backgroundColor: 'white',
-    borderRadius:5,
-    marginBottom:20,
-    borderWidth:1,
-    borderColor: 'black',
+    alignItems: 'center',
+    position:'absolute',
+    bottom: "8%",
+    backgroundColor:'#FFFFFF',
   },
   button2:
   {
     padding:15,
     alignItems:'center',
-    width:'80%',
+    width:'100%',
     backgroundColor: 'black',
     borderRadius:5,
-    marginBottom:30,
-
+    flexDirection:'row',
+    justifyContent: 'space-between',
   },
   btnText2:{
     color: 'white',
+    marginLeft:"30%",
   },
   input:{
     padding:10,
@@ -419,7 +476,7 @@ const styles = StyleSheet.create({
     fontSize:53,
     marginTop:60,
     fontFamily:'Satisfy_400Regular',
-    color:'rgb(51,51,51)',
+    color:'rgb(67,63,64)',
     letterSpacing:2,
   }
 
