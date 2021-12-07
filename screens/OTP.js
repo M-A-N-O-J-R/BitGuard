@@ -53,17 +53,23 @@ export default function SignupScreen({route,navigation}) {
   const [code,setCode] = useState('');
   const [verificationId, setVerificationId] = useState(null);
   const recaptchaVerifier = useRef(null);
-
+  
   
   useEffect(() => {
-    if (code !== '') 
+
+    //console.log(user);
+    console.log("Hello code change");
+    if ( code !== '') 
     {
       // Make API call to /beer
       confirmCode();
+      setCode('');
+      console.log(code);
     } else {
       // Throw error 404, beer not found
       console.log('waiting');
     }
+
   }, [code]);
 
   const confirmCode2=()=>{
@@ -315,11 +321,7 @@ export default function SignupScreen({route,navigation}) {
           value={d6}
           
           keyboardType="number-pad"/>    
-        </View>
-
-        <Text>{number}</Text>
-        <Text>{code}</Text>
-        <Text>{id}</Text>    
+        </View>  
 </View>
         <View style={styles.btnContainer}>
         <TouchableOpacity onPress={()=>{confirmCode2()}} style={styles.button2}>
