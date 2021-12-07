@@ -1,5 +1,5 @@
 import React ,{useState,useEffect} from 'react'
-import { StyleSheet, Text, View ,FlatList,Image,ImageBackground } from 'react-native'
+import { StyleSheet, Text, View ,FlatList,Image,ImageBackground,TextInput } from 'react-native'
 import firebase from '../firebase/fire'
 
 import { 
@@ -48,9 +48,65 @@ import {
 const Global = () => {
     var date = new Date().getDate();
     var month = new Date().getMonth() + 1;
+    var mon="";
     var year = new Date().getFullYear();
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+    hours=hours+':'+minutes;
     date=date+'-'+month+'-'+year;
 
+    const [msg,setMsg]=useState('');
+
+    if(month==1)
+    {
+        mon="Jan";
+    }
+    else if(month==2)
+    {
+        mon="Feb";
+    }
+    else if(month==3)
+    {
+        mon="Mar";
+    }
+    else if(month==4)
+    {
+        mon="Apr";
+    }
+    else if(month==5)
+    {
+        mon="May";
+    }
+    else if(month==6)
+    {
+        mon="Jun";
+    }
+    else if(month==7)
+    {
+        mon="Jul";
+    }
+    else if(month==8)
+    {
+        mon="Aug";
+    }else if(month==9)
+    {
+        mon="Sep";
+    }
+    else if(month==10)
+    {
+        mon="Oct";
+    }
+    else if(month==11)
+    {
+        mon="Nov";
+    }
+    else if(month==12)
+    {
+        mon="Dec";
+    }
+    // console.log(mon);
+    // console.log(hours);
     const ref = firebase.firestore().collection("global");
     //const [items, setItems] =useState([]);
     const [items,setItems]=useState(
@@ -134,12 +190,12 @@ const Global = () => {
     
     return (
         <View style={styles.container}>
-        <ImageBackground source={require('../assets/bg8.jpg')} resizeMode="cover" style={styles.image}>
+        {/* <ImageBackground source={require('../assets/bg8.jpg')} resizeMode="cover" style={styles.image}> */}
         <Text style={styles.HeaderText}>New</Text>
-        <View>
-            <Text></Text>
+        <View style={styles.inputCont}>
+            <TextInput multiline value={msg} onChangeText={(text)=>{setMsg(text)}} placeholder="What do you want to talk about" style={styles.input}/>
         </View>
-            </ImageBackground>
+            {/* </ImageBackground> */}
         </View>
     )
 }
@@ -147,6 +203,13 @@ const Global = () => {
 export default Global
 
 const styles = StyleSheet.create({
+    inputCont:
+    {
+        width: "100%",
+        backgroundColor: 'yellow',
+        padding: 10,
+        height: "80%",
+    },
     iconT:
     {
         fontSize:13,
@@ -156,6 +219,8 @@ const styles = StyleSheet.create({
         flex:1,  
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor:'white',
+        width:"100%",
     },
     itemRow:
     {
@@ -192,53 +257,6 @@ const styles = StyleSheet.create({
         // borderColor: '#eee',
         // padding:30,
     },
-    likeLove:
-    {
-        flexDirection:'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        
-
-    },
-    itemLove:
-    {
-        flexDirection:'row',
-        
-        alignItems: 'center',
-        justifyContent:'space-evenly',
-        width:'17%'
-    },
-    itemLike:
-    {
-        flexDirection:'row',
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        padding:5,
-        width:'17%',
-    },
-    itemDate:
-    {
-        color:'grey',
-        fontSize:12,
-        fontWeight:'bold',
-        marginRight:5,
-    },
-    itemTD:
-    {
-        flexDirection:'row',
-        alignItems: 'center',
-    },
-    itemTime:
-    {
-        color:'#C8C8C8',
-        fontSize:12,
-        marginRight:5,
-    },
-    image: {
-        flex: 1,
-        justifyContent: "center",
-      
-      },
 HeaderText:
   {
     fontSize:23,
@@ -247,6 +265,18 @@ HeaderText:
     color:'rgb(67,63,64)',
     letterSpacing:1,
     textAlign:'center',
+  },
+  input: 
+  {
+    backgroundColor:'red',
+    width:"100%",
+    color:'black',
+    textAlign :'justify',
+    borderRadius:5,
+    fontFamily:'Merriweather_300Light_Italic',
+    fontSize:17,
+    padding:15,
+
   }
 
 })
