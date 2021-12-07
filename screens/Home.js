@@ -54,7 +54,7 @@ export default function App() {
         >
           {()=> <Global/>}
         </Tab.Screen>
-        <Tab.Screen name="New" 
+        <Tab.Screen name="Post" 
          options={{
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="add-outline" size={24} color="black" />

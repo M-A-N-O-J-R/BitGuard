@@ -252,26 +252,14 @@ export default function SignupScreen({navigation}) {
             sentVerification()
             }} style={styles.button2}>
            <Text style={styles.btnText2} >Send OTP</Text>
+           <AntDesign name="arrowright" size={24} color="white" />
         </TouchableOpacity>
       </View>
-      <TextInput
-        placeholder="Confirmation Code"
-        onChangeText={(text)=>{
-            setCode(text);
-        }}
-        value={code}
-        keyboardType="number-pad"/>
-        <View style={styles.btnContainer}>
-        <TouchableOpacity onPress={()=>{navigation.navigate('OTP',{
-            number:phoneNumber,
-            otherParam: 'anything you want here',
-          })}} style={styles.button}>
-           <Text style={styles.btnText}>Confirm Code</Text>
-        </TouchableOpacity>
+      
         {/* <TouchableOpacity onPress={()=>{sentVerification()}} style={styles.button2}>
            <Text style={styles.btnText2} >Send OTP</Text>
         </TouchableOpacity> */}
-      </View>
+  
       <Text style={styles.otext}>--------------------or--------------------</Text>
       <View style={styles.otherLogin}>
         <View style={styles.otherLogingrp}>
@@ -318,7 +306,7 @@ const styles = StyleSheet.create({
   },
   btnContainer:{
 
-    width:'60%',
+    width:'90%',
     alignItems: 'center',
     marginTop:20,
   },
@@ -340,11 +328,14 @@ const styles = StyleSheet.create({
     width:'80%',
     backgroundColor: 'black',
     borderRadius:5,
-    marginBottom:30,
+    marginBottom:80,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
 
   },
   btnText2:{
     color: 'white',
+    marginLeft:"35%"
   },
   input:{
     padding:10,
@@ -421,6 +412,7 @@ const styles = StyleSheet.create({
     fontFamily:'Satisfy_400Regular',
     color:'rgb(51,51,51)',
     letterSpacing:2,
+    marginBottom:40,
   }
 
 });
