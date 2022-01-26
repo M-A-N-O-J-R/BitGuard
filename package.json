@@ -30,21 +30,24 @@
     "firebase": "8.2.3",
     "font-awesome": "^4.7.0",
     "lottie-react-native": "^5.0.0",
+    "native-base": "^3.3.4",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-action-button": "^2.8.5",
+    "react-native-floating-action": "^1.22.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-google-signin": "^2.1.1",
     "react-native-otp-textinput": "0.0.8",
     "react-native-reanimated": "^2.2.4",
-    "react-native-safe-area-context": "^3.3.2",
+    "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^3.9.0",
+    "react-native-svg": "^12.1.0",
     "react-native-web": "0.17.1",
     "react-native-webview": "11.13.0",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
-    "react-navigation-tabs": "^2.11.1",
-    "undefined": "react-navigation/bottom-tabs"
+    "react-navigation-tabs": "^2.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

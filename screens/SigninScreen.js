@@ -179,7 +179,7 @@ if(!fontsLoaded)
       >
       <View style={styles.inputCont}>
       <Ionicons name="mail-open-outline" size={24} color="black" style={styles.icones}/>
-        <TextInput placeholder="Enter the User Mail" value={email} onChangeText={(text)=>
+        <TextInput placeholder="E-Mail" value={email} onChangeText={(text)=>
           {
             setEmail(text.trim());
           }
@@ -187,8 +187,8 @@ if(!fontsLoaded)
       </View>
       
       <View style={styles.inputCont}>
-      <MaterialCommunityIcons name="form-textbox-password" size={24} color="black" style={styles.icones} />
-      <TextInput placeholder="Enter the User Password" value={password} onChangeText={(text)=>setPassword(text)} style={styles.input} secureTextEntry></TextInput>
+      <MaterialCommunityIcons name="key-outline" size={24} color="black" style={styles.icones} />
+      <TextInput placeholder="Password" value={password} onChangeText={(text)=>setPassword(text)} style={styles.input} secureTextEntry></TextInput>
       </View>
       </KeyboardAvoidingView>
       <View style={styles.btnContainer}>
@@ -215,20 +215,8 @@ if(!fontsLoaded)
           </TouchableOpacity>
           <Text style={styles.otext}>Google</Text>
         </View>
-        <View style={styles.otherLogingrp}>
-          <TouchableOpacity onPress={()=>anonymousSignin()} style={styles.icons}>
-            <MaterialCommunityIcons name="location-enter" size={27} color="black" />
-          
-          </TouchableOpacity>
-          <Text style={styles.otext}>Anonymous</Text>
-        </View>
-        <View style={styles.otherLogingrp}>
-          <TouchableOpacity onPress={()=>{navigation.navigate('Number')}} style={styles.icons2}>
-          <AntDesign name="mobile1" size={23} color="black" />
-          </TouchableOpacity>
-          <Text style={styles.otext}>Number</Text>
-        </View>
         
+       
       </View>
       
     </View>
