@@ -23,7 +23,7 @@ function App() {
       <Stack.Screen options={{headerShown:false}} name="Signin" component={SigninScreen} />
       <Stack.Screen options={{headerShown:false}} name="Signup" component={SignupScreen} />
         <Stack.Screen options={{ title: 'My Vault',headerTitleAlign: "center",headerStyle: {
-            backgroundColor: 'lavender',
+            backgroundColor: 'white',
           },
           headerTintColor: 'black',
           headerTitleStyle: {
