@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Foundation } from '@expo/vector-icons';
 import { Feather,AntDesign,Ionicons } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
 
 import Records from './Records';
 import Generate from './Generate';
@@ -43,10 +44,10 @@ export default function App({navigation}) {
             },
 			    }}
           screenOptions={{headerShown:false}}>
-        <Tab.Screen name="Home" 
+        <Tab.Screen name="Details" 
          options={{
             tabBarIcon: ({ color, size }) => (
-              <Feather name="globe" size={24} color="black" />
+              <SimpleLineIcons name="notebook" size={24} color="black" />
             )
             
           }}
