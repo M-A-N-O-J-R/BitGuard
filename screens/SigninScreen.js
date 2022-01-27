@@ -14,6 +14,7 @@ import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons,Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 
 import { getAuth, signInAnonymously } from "firebase/auth";
@@ -176,7 +177,14 @@ export default function SignupScreen({navigation}) {
   Oswald_600SemiBold,
   Oswald_700Bold,
   Satisfy_400Regular,
-  Merriweather_700Bold
+  Merriweather_300Light,
+  Merriweather_300Light_Italic,
+  Merriweather_400Regular,
+  Merriweather_400Regular_Italic,
+  Merriweather_700Bold,
+  Merriweather_700Bold_Italic,
+  Merriweather_900Black,
+  Merriweather_900Black_Italic
 });
 if(!fontsLoaded)
 {
@@ -185,10 +193,13 @@ if(!fontsLoaded)
 
   return (
    <View style={styles.container1}> 
-   <ImageBackground source={require('../assets/bg8.jpg')} resizeMode="cover" style={styles.image}>
+   <ImageBackground source={require('../assets/sbg.jpeg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
-       
-    <Text style={styles.HeaderText}>BitGaurd</Text>
+       <View style={{height: 100,...styles.title}}>
+          <Text style={styles.HeaderText}>BitGaurd</Text>
+          <FontAwesome name="shield" size={50} color="black" />
+       </View>
+    
       <KeyboardAvoidingView
        behavior="padding" style={styles.container2}
       >
@@ -241,6 +252,17 @@ if(!fontsLoaded)
 }
 
 const styles = StyleSheet.create({
+  title:
+  {
+    
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-around',
+    width:'55%',
+    marginTop:'25%',
+    marginBottom:'17%',
+
+  },
   link:
   {
     color:'rgb(0,149,247)',
@@ -313,7 +335,7 @@ const styles = StyleSheet.create({
     color: 'black',
     borderRadius:5,
     marginLeft:"5%",
-    fontSize:15,
+    fontSize:14,
     width:"80%",
     
   },
@@ -359,10 +381,8 @@ const styles = StyleSheet.create({
   },
   HeaderText:
   {
-    fontSize:45,
-    marginTop:60,
-    marginBottom:40,
-    fontFamily:'Merriweather_700Bold',
+    fontSize:32,
+    fontFamily:'Merriweather_700Bold_Italic',
     color:'rgb(51,51,51)',
     letterSpacing:2,
   },
