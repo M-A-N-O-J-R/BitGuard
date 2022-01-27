@@ -22,7 +22,7 @@ function App() {
       <Stack.Navigator>
       <Stack.Screen options={{headerShown:false}} name="Signin" component={SigninScreen} />
       <Stack.Screen options={{headerShown:false}} name="Signup" component={SignupScreen} />
-        <Stack.Screen options={{ title: 'My Vault',headerTitleAlign: "center",headerStyle: {
+      {/* <Stack.Screen options={{ title: 'My Vault',headerTitleAlign: "center",headerStyle: {
             backgroundColor: 'white',
           },
           headerTintColor: 'black',
@@ -36,8 +36,10 @@ function App() {
      </View>
  </TouchableHighlight>
   
-          ), }} name="Home" component={HomeScreen} />
-        <Stack.Screen options={{headerShown:false}} name="AddItem" component={AddItem} />
+          ), }} name="Home" component={HomeScreen} /> */}
+        <Stack.Screen options={{headerShown:false}} name="Home" component={HomeScreen} />
+        {/* <Stack.Screen options={{headerShown:false}} name="AddItem" component={AddItem} />
+        <Stack.Screen options={{headerShown:false}} name="generate" component={AddItem} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
