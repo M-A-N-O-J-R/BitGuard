@@ -64,14 +64,16 @@ const  handleSubmit = () => {
 
 const styles = StyleSheet.create({
   main: {
-    flex:0.50,
+    flex:0.95,
     padding: 30,
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: 'white',
     height:65,
-    width:300,
-    borderRadius:20
+    width:400,
+    borderRadius:20,
+    opacity:0.9,
+    marginTop:40
   },
   title: {
     marginBottom: 50,

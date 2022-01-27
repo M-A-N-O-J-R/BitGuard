@@ -41,7 +41,7 @@ const Home = ({navigation}) => {
     <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
         {
           <View style={styles.container}>
-            <View >
+            <View>
               <FlatList
               keyExtractor={(item)=>item.title}
               data={val}
