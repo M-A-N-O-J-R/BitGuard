@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 const Home = ({navigation}) => {
-  
+  const ref=firebase.firestore().collection('records');
   return (
     <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
         {/* Rest of the app comes ABOVE the action button component !*/}
