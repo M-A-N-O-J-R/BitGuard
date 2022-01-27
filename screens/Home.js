@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import firebase from '../firebase/fire'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import { Foundation } from '@expo/vector-icons';
 import { Feather,AntDesign,Ionicons } from '@expo/vector-icons';
 
 import Records from './Records';
@@ -29,7 +29,7 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+export default function App({navigation}) {
   return (
     <NavigationContainer independent={true}>
       <Tab.Navigator
@@ -51,12 +51,12 @@ export default function App() {
             
           }}
         >
-          {()=> <Records/>}
+          {()=> <Records navigation={navigation}/>}
         </Tab.Screen>
-        <Tab.Screen name="Post" 
+        <Tab.Screen name="Generate Password" 
          options={{
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="add-outline" size={24} color="black" />
+                <Foundation name="key" size={24} color="black" />
             )
             
           }}

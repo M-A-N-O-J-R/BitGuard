@@ -38,8 +38,7 @@ function App() {
   
           ), }} name="Home" component={HomeScreen} /> */}
         <Stack.Screen options={{headerShown:false}} name="Home" component={HomeScreen} />
-        {/* <Stack.Screen options={{headerShown:false}} name="AddItem" component={AddItem} />
-        <Stack.Screen options={{headerShown:false}} name="generate" component={AddItem} /> */}
+        <Stack.Screen options={{headerShown:false}} name="AddItem" component={AddItem} />
       </Stack.Navigator>
     </NavigationContainer>
   );

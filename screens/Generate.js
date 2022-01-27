@@ -10,7 +10,7 @@ import { Feather,AntDesign,Ionicons } from '@expo/vector-icons';
 
 export default function App() {
   return (
-    <View>
+    <View style={styles.container}>
         <Text>generate</Text>
     </View>
   );

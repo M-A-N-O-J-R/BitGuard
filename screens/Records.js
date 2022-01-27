@@ -84,13 +84,13 @@ const Home = ({navigation}) => {
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
           
-          <ActionButton.Item buttonColor='#1abc9c' title="Update" onPress={() => {}}>
+          {/* <ActionButton.Item buttonColor='#1abc9c' title="Update" onPress={() => {}}>
             <Icon name="sync" style={styles.actionButtonIcon} />
           </ActionButton.Item>
 
           <ActionButton.Item buttonColor='#3498db' title="Generate Password" onPress={() => {}}>
             <Icon name="key" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
+          </ActionButton.Item> */}
         </ActionButton>
       </View>
   );
