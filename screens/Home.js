@@ -1,113 +1,88 @@
-import { StyleSheet, Text, View,FlatList } from 'react-native';
-import React, { useState,useEffect } from 'react';
-import { FloatingAction } from "react-native-floating-action";
-import { Ionicons } from '@expo/vector-icons';
-import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
-import firebase from '../firebase/fire';
-import Firebase from 'firebase'
-import AppList from './AppList.js';
+import { StatusBar } from 'expo-status-bar';
+import React,{useEffect,useState} from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import firebase from '../firebase/fire'
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { Feather,AntDesign,Ionicons } from '@expo/vector-icons';
 
+import Records from './Records';
+import Generate from './Generate';
 
-
-const Home = ({navigation}) => {
-
-
-
-  const [val,setVal]=useState([
-    {
-      title:'Instagram',
-      username:'aravinth_26',
-      password:'raj@123'
-  },
-  {
-      title:'Facebook',
-      username:'aravinth_26',
-      password:'raj@123'
-  },
-  {
-      title:'Twitter',
-      username:'aravinth_26',
-      password:'raj@123'
-  },
-  {
-      title:'Github',
-      username:'aravinth_26',
-      password:'raj@123'
-  },
-  {
-      title:'Linkedin',
-      username:'aravinth_26',
-      password:'raj@123'
-  }
-  ]);
-
-  const ref=firebase.firestore().collection('records');
-  
-  async function getRecords() {
-    var user = firebase.auth().currentUser;
-    if(user!=null) {
-  
-        await ref.onSnapshot((querySnapshot) => {
-            const rec=[];
-            querySnapshot.forEach((doc)=>{
-            rec.push(doc.data());    
-            })
-            setVal(rec);
-        })
-    }
-  }
-  useEffect(()=>{
-    getRecords();
-  },[]);
-  
+function HomeScreen() {
   return (
-    <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
-        {
-          <View style={styles.container}>
-            <View >
-              <FlatList
-              keyExtractor={(item)=>item.title}
-              data={val}
-              
-              renderItem={({item})=>(
-                <AppList item={item}/>
-              )}
-              />
-              
-              </View>
-          </View>
-        }
-        <ActionButton size={60} buttonColor="rgba(231,76,60,1)">
-          <ActionButton.Item buttonColor='#9b59b6' title="Add" onPress={() => {console.log("notes tapped!");navigation.navigate('AddItem');}}>
-            <Icon name="md-create" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-          
-          <ActionButton.Item buttonColor='#1abc9c' title="Update" onPress={() => {}}>
-            <Icon name="sync" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-
-          <ActionButton.Item buttonColor='#3498db' title="Generate Password" onPress={() => {}}>
-            <Icon name="key" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-        </ActionButton>
-      </View>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+    </View>
   );
-};
+}
 
-export default Home;
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
+
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer independent={true}>
+      <Tab.Navigator
+          
+          tabBarOptions={
+          {
+           
+            labelStyle: 
+            {
+              fontSize: 12,
+            },
+			    }}
+          screenOptions={{headerShown:false}}>
+        <Tab.Screen name="Home" 
+         options={{
+            tabBarIcon: ({ color, size }) => (
+              <Feather name="globe" size={24} color="black" />
+            )
+            
+          }}
+        >
+          {()=> <Records/>}
+        </Tab.Screen>
+        <Tab.Screen name="Post" 
+         options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="add-outline" size={24} color="black" />
+            )
+            
+          }}
+        >
+          {()=> <Generate/>}
+        </Tab.Screen>
+        <Tab.Screen name="Settings" 
+         options={{
+           tabBarIcon:({ color,size})=>(
+            <AntDesign name="setting" size={24} color="black" />
+           )
+         }}
+        component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+
+
 
 const styles = StyleSheet.create({
-  actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
-    color: 'white',
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  container:{
-    flex:1,
-    backgroundColor:'lavender',
-    alignItems:'center',
-    justifyContent:'center'
-  }
 });
