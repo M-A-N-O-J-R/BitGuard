@@ -14,20 +14,22 @@ var db = firebase.firestore();
 import addbg from '../assets/bg10.jpg';
 
 
-let addItem = (title,pass) => {
-  ref.add({
-    name: title,
-    password: pass
-  },()=>{
-    onChangePass('');
-    onChangeTitle('');
-  });
-};
+
 
 export default function AddItem ({navigation}){
  const [title, onChangeTitle] = React.useState('');
  const [pass, onChangePass] = React.useState('');
 
+ let addItem = (title,pass) => {
+  ref.add({
+    name: title,
+    password: pass
+  }
+    
+  );
+  onChangePass('');
+  onChangeTitle('');
+};
 
 const  handleSubmit = () => {
     addItem(title,pass);
