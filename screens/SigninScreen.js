@@ -39,45 +39,13 @@ import {
   Merriweather_900Black,
   Merriweather_900Black_Italic 
 } from '@expo-google-fonts/merriweather'
-import { LinearGradient } from 'react-native-svg';
-const image = { uri: "https://hazlitt.net/sites/default/files/styles/article-header-image/public/field/image/gossip-illo-web.jpg?itok=ELA1gHGp" };
-
 
 export default function SignupScreen({navigation}) {
   
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
-  const [Error,setError]=useState('');
- 
-
-  const [phoneNumber,setPhoneNumber]=useState('');
-  const [code,setCode] = useState('');
-
-  const sentVerification=()=>{
-
-  };
-
-  const confirmCode=()=>{
-
-  };
-  
-  const anonymousSignin =()=>{
-
-    firebase.auth().signInAnonymously()
-  .then(() => {
-    // Signed in..
-    console.log('anon signin success');
-     navigation.navigate('Home');
-  })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-    console.log(errorMessage);
-  });
 
 
-  } 
 
   const handleGoogleSignin=()=>{
     const config= {
@@ -127,34 +95,6 @@ export default function SignupScreen({navigation}) {
     return false;
   }
   
-  const onSignIn=(googleUser) => {
-    console.log('Google Auth Response', googleUser);
-    // We need to register an Observer on Firebase Auth to make sure auth is initialized.
-    var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
-      unsubscribe();
-      // Check if we are already signed-in Firebase with the correct user.
-      if (!isUserEqual(googleUser, firebaseUser)) {
-        // Build Firebase credential with the Google ID token.
-        var credential = firebase.auth.GoogleAuthProvider.credential(
-            googleUser.getAuthResponse().id_token);
-  
-        // Sign in with credential from the Google user.
-        firebase.auth().signInWithCredential(credential).catch((error) => {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          // ...
-        });
-      } else {
-        console.log('User already signed-in Firebase.');
-      }
-    });
-  }
-
   const signIn = async()=>{
     console.log(email);
     console.log(password);
@@ -163,13 +103,6 @@ export default function SignupScreen({navigation}) {
     }).catch((err)=>{console.log(err.message)});
   }
 
-
-  const signUp = async()=>{
-    
-    firebase.auth().createUserWithEmailAndPassword(email,password).then((email,password)=>signInWithEmailAndPassword(email,password)).then(()=>{
-      navigation.navigate('Home');
-    }).catch((err)=>{console.log(err.message)});
-  } 
   let [fontsLoaded,error]= useFonts({
   Oswald_200ExtraLight,
   Oswald_300Light,
@@ -194,7 +127,7 @@ if(!fontsLoaded)
 
   return (
    <View style={styles.container1}> 
-   <ImageBackground source={require('../assets/sbg.jpeg')} resizeMode="cover" style={styles.image}>
+   <ImageBackground source={require('../assets/sbg2.jpg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
        <View style={{height: 100,...styles.title}}>
           <Text style={styles.HeaderText}>BitGaurd</Text>
@@ -256,7 +189,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'space-around',
     width:'55%',
-    marginTop:'25%',
+    marginTop:'12%',
     marginBottom:'12%',
 
   },
@@ -277,7 +210,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius:7,
     justifyContent: 'flex-start',
-    borderColor: 'black',
+  
     
   },
   container: {
@@ -349,11 +282,10 @@ const styles = StyleSheet.create({
     padding:10,
     backgroundColor: 'white',
     color: 'black',
-    borderRadius:5,
+    borderRadius:7,
     marginLeft:"5%",
     fontSize:14,
     width:"80%",
-    
   },
   image: {
     flex: 1,
@@ -383,10 +315,11 @@ const styles = StyleSheet.create({
   {
     flexDirection:'row',
     marginTop:20,
-    width:'76%',
+    width:'65%',
     justifyContent:'space-around',
     alignItems: 'center',
-    padding:20,
+    
+    
   },
   otherLogingrp:
   {
