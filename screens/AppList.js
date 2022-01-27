@@ -2,11 +2,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default  AppList= ({list}) => {
+export default  AppList= ({item}) => {
   return (
     <View style={styles.listContainer}>
         <TouchableOpacity>
-        <Text style={styles.listTitle} >{list.title}</Text>
+        <Text  >{item.id}</Text>
+        <Text  >{item.name}</Text>
+        <Text >{item.password}</Text>
         </TouchableOpacity>      
     </View>
     

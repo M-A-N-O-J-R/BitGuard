@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View,FlatList } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FloatingAction } from "react-native-floating-action";
 import { Ionicons } from '@expo/vector-icons';
 import ActionButton from 'react-native-action-button';
@@ -8,7 +8,13 @@ import firebase from '../firebase/fire';
 import Firebase from 'firebase'
 import AppList from './AppList.js';
 
+
+
+
 const Home = ({navigation}) => {
+
+
+
   const [val,setVal]=useState([
     {
       title:'Instagram',
@@ -36,7 +42,26 @@ const Home = ({navigation}) => {
       password:'raj@123'
   }
   ]);
+
   const ref=firebase.firestore().collection('records');
+  
+  async function getRecords() {
+    var user = firebase.auth().currentUser;
+    if(user!=null) {
+  
+        await ref.onSnapshot((querySnapshot) => {
+            const rec=[];
+            querySnapshot.forEach((doc)=>{
+            rec.push(doc.data());    
+            })
+            setVal(rec);
+        })
+    }
+  }
+  useEffect(()=>{
+    getRecords();
+  },[]);
+  
   return (
     <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
         {
@@ -47,7 +72,7 @@ const Home = ({navigation}) => {
               data={val}
               
               renderItem={({item})=>(
-                <AppList list={item}/>
+                <AppList item={item}/>
               )}
               />
               
