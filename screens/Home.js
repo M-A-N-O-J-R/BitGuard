@@ -41,12 +41,11 @@ const Home = ({navigation}) => {
     <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
         {
           <View style={styles.container}>
-            <View style={{height :275,paddingLeft:32}}>
+            <View >
               <FlatList
               keyExtractor={(item)=>item.title}
               data={val}
-              horizontal={true} 
-               showsHorizontalScrollIndicator={false}
+              
               renderItem={({item})=>(
                 <AppList list={item}/>
               )}
