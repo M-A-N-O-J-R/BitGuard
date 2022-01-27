@@ -14,6 +14,7 @@ import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons,Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 
 import { getAuth, signInAnonymously } from "firebase/auth";
@@ -25,6 +26,20 @@ import {
   Oswald_600SemiBold,
   Oswald_700Bold 
 } from '@expo-google-fonts/oswald'
+import { 
+  Satisfy_400Regular 
+} from '@expo-google-fonts/satisfy'
+import { 
+  Merriweather_300Light,
+  Merriweather_300Light_Italic,
+  Merriweather_400Regular,
+  Merriweather_400Regular_Italic,
+  Merriweather_700Bold,
+  Merriweather_700Bold_Italic,
+  Merriweather_900Black,
+  Merriweather_900Black_Italic 
+} from '@expo-google-fonts/merriweather'
+import { LinearGradient } from 'react-native-svg';
 const image = { uri: "https://hazlitt.net/sites/default/files/styles/article-header-image/public/field/image/gossip-illo-web.jpg?itok=ELA1gHGp" };
 
 
@@ -66,8 +81,8 @@ export default function SignupScreen({navigation}) {
 
   const handleGoogleSignin=()=>{
     const config= {
-      iosClientId:`219284175146-6f1tq9uk0a6r76tjte6e6df59sqnj0dn.apps.googleusercontent.com`,
-      androidClientId:`219284175146-bvngane5ssmujvteiosg672mpdof6r5a.apps.googleusercontent.com`,
+      iosClientId:`1008976412474-sq960nfh6lkmt78drl1rtesnhaginr7m.apps.googleusercontent.com`,
+      androidClientId:`1008976412474-rlnvorqui99k1i51ov04gmcq7l5qp7ss.apps.googleusercontent.com`,
       scopes: ['profile', 'email']
     }
     Google.logInAsync(config).then((result)=>
@@ -161,7 +176,16 @@ export default function SignupScreen({navigation}) {
   Oswald_400Regular,
   Oswald_500Medium,
   Oswald_600SemiBold,
-  Oswald_700Bold 
+  Oswald_700Bold,
+  Satisfy_400Regular,
+  Merriweather_300Light,
+  Merriweather_300Light_Italic,
+  Merriweather_400Regular,
+  Merriweather_400Regular_Italic,
+  Merriweather_700Bold,
+  Merriweather_700Bold_Italic,
+  Merriweather_900Black,
+  Merriweather_900Black_Italic
 });
 if(!fontsLoaded)
 {
@@ -170,10 +194,13 @@ if(!fontsLoaded)
 
   return (
    <View style={styles.container1}> 
-   <ImageBackground source={require('../assets/bg8.jpg')} resizeMode="cover" style={styles.image}>
+   <ImageBackground source={require('../assets/sbg.jpeg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
-       
-    <Text style={styles.HeaderText}>Gossip..</Text>
+       <View style={{height: 100,...styles.title}}>
+          <Text style={styles.HeaderText}>BitGaurd</Text>
+          <FontAwesome name="shield" size={50} color="black" />
+       </View>
+    
       <KeyboardAvoidingView
        behavior="padding" style={styles.container2}
       >
@@ -207,15 +234,11 @@ if(!fontsLoaded)
       </View>
       <Text style={styles.otext}>--------------------or--------------------</Text>
       <View style={styles.otherLogin}>
-        <View style={styles.otherLogingrp}>
-          <TouchableOpacity onPress={()=>handleGoogleSignin()} style={styles.icons}>
-            {/* <AntDesign name="google" size={27} color="black" />
-                 */}
-            <Image source={require('../assets/google.png')} style={styles.gicon}/>    
-          </TouchableOpacity>
-          <Text style={styles.otext}>Google</Text>
-        </View>
-        
+      
+          <TouchableOpacity onPress={()=>handleGoogleSignin()} style={styles.button3}>
+           <Image source={require('../assets/google.png')} style={styles.gicon}/>
+           <Text style={styles.btnText3}>Continue with Google</Text>
+        </TouchableOpacity>
        
       </View>
       
@@ -226,6 +249,17 @@ if(!fontsLoaded)
 }
 
 const styles = StyleSheet.create({
+  title:
+  {
+    
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-around',
+    width:'55%',
+    marginTop:'25%',
+    marginBottom:'12%',
+
+  },
   link:
   {
     color:'rgb(0,149,247)',
@@ -292,13 +326,32 @@ const styles = StyleSheet.create({
   btnText2:{
     color: 'white',
   },
+  button3:
+  {
+    padding:15,
+    alignItems:'center',
+    width:'100%',
+    borderRadius:5,
+    backgroundColor:'white',
+    flexDirection:'row',
+    justifyContent: 'center',
+    borderBottomLeftRadius:30,
+    borderTopLeftRadius:30,
+    borderBottomRightRadius:30,
+    borderTopRightRadius:30,
+    borderWidth: 1,
+  },
+  btnText3:{
+    color: 'black',
+    marginLeft:"5%",
+  },
   input:{
     padding:10,
     backgroundColor: 'white',
     color: 'black',
     borderRadius:5,
     marginLeft:"5%",
-    fontSize:15,
+    fontSize:14,
     width:"80%",
     
   },
@@ -306,6 +359,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   
+  },
+  image2: {
+    flex: 1,
+    justifyContent: "center",
+    borderRadius:50,
   },
   icons: {
     backgroundColor:'white',
@@ -324,8 +382,8 @@ const styles = StyleSheet.create({
   otherLogin:
   {
     flexDirection:'row',
-    marginTop:30,
-    width:'80%',
+    marginTop:20,
+    width:'76%',
     justifyContent:'space-around',
     alignItems: 'center',
     padding:20,
@@ -344,10 +402,8 @@ const styles = StyleSheet.create({
   },
   HeaderText:
   {
-    fontSize:53,
-    marginTop:60,
-    marginBottom:40,
-    fontFamily:'Satisfy_400Regular',
+    fontSize:32,
+    fontFamily:'Merriweather_700Bold_Italic',
     color:'rgb(51,51,51)',
     letterSpacing:2,
   },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import {
   View,
   Text,
@@ -15,19 +15,22 @@ var db = firebase.firestore();
 import addbg from '../assets/bg10.jpg';
 
 
-let addItem = (title,username,pass) => {
-  ref.add({
-    name: title,
-    id: username,
-    password: pass
-  });
-};
+
+
 
 export default function AddItem ({navigation}){
  const [title, onChangeTitle] = React.useState('');
  const [username, onChangeUsername] = React.useState('');
  const [pass, onChangePass] = React.useState('');
 
+ let addItem = (title,username,pass) => {
+  ref.add({
+    name: title,
+    id: username,
+    password: pass
+  });
+  
+};
 
 const  handleSubmit = () => {
     addItem(title,username,pass);
@@ -46,7 +49,7 @@ const  handleSubmit = () => {
         <Text>Username : </Text>
         <TextInput placeholder="xyz" style={styles.itemInput} onChangeText={text => onChangeUsername(text)} />
         <Text>Password : </Text>
-        <TextInput placeholder="***************" secureTextEntry style={styles.itemInput} onChangeText={text => onChangePass(text)} />
+        <TextInput placeholder="***************"  value={pass} secureTextEntry style={styles.itemInput} onChangeText={text => onChangePass(text)} />
         <TouchableHighlight
           style={styles.button}
           underlayColor="white"

@@ -1,12 +1,13 @@
 import * as firebase from 'firebase';
 import {getFirestore} from 'firebase/firestore'
 const firebaseConfig = {
-  apiKey: "AIzaSyAgh2T7sLg-lyhweKBCf0yI2OWKsQbSImw",
-  authDomain: "pass-5054d.firebaseapp.com",
-  projectId: "pass-5054d",
-  storageBucket: "pass-5054d.appspot.com",
-  messagingSenderId: "1008976412474",
-  appId: "1:1008976412474:web:a92166f36d996fb09ada03"
+  apiKey: "AIzaSyAw6hVgzDBlBAucs269aX96Fi_VDEu35so",
+  authDomain: "bitgaurd-4e222.firebaseapp.com",
+  projectId: "bitgaurd-4e222",
+  storageBucket: "bitgaurd-4e222.appspot.com",
+  messagingSenderId: "997454642261",
+  appId: "1:997454642261:web:0ce177000a90a9146468dc",
+  measurementId: "G-NQBE9CSX94"
   
 };
 
