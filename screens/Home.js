@@ -1,14 +1,60 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View,FlatList } from 'react-native';
+import React, { useState } from 'react';
 import { FloatingAction } from "react-native-floating-action";
 import { Ionicons } from '@expo/vector-icons';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import firebase from '../firebase/fire';
+import Firebase from 'firebase'
+import AppList from './AppList.js';
+
 const Home = ({navigation}) => {
-  
+  const [val,setVal]=useState([
+    {
+      title:'Instagram',
+      username:'aravinth_26',
+      password:'raj@123'
+  },
+  {
+      title:'Facebook',
+      username:'aravinth_26',
+      password:'raj@123'
+  },
+  {
+      title:'Twitter',
+      username:'aravinth_26',
+      password:'raj@123'
+  },
+  {
+      title:'Github',
+      username:'aravinth_26',
+      password:'raj@123'
+  },
+  {
+      title:'Linkedin',
+      username:'aravinth_26',
+      password:'raj@123'
+  }
+  ]);
+  const ref=firebase.firestore().collection('records');
   return (
     <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
-        {/* Rest of the app comes ABOVE the action button component !*/}
+        {
+          <View style={styles.container}>
+            <View style={{height :275,paddingLeft:32}}>
+              <FlatList
+              keyExtractor={(item)=>item.title}
+              data={val}
+              horizontal={true} 
+               showsHorizontalScrollIndicator={false}
+              renderItem={({item})=>(
+                <AppList list={item}/>
+              )}
+              />
+              
+              </View>
+          </View>
+        }
         <ActionButton size={60} buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item buttonColor='#9b59b6' title="Add" onPress={() => {console.log("notes tapped!");navigation.navigate('AddItem');}}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
@@ -34,4 +80,10 @@ const styles = StyleSheet.create({
     height: 22,
     color: 'white',
   },
+  container:{
+    flex:1,
+    backgroundColor:'lavender',
+    alignItems:'center',
+    justifyContent:'center'
+  }
 });

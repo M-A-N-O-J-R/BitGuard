@@ -8,6 +8,7 @@ import {
   Alert,
   ImageBackground,
 } from 'react-native';
+import { Formik } from 'formik';
 import firebase from '../firebase/fire'
 const ref=firebase.firestore().collection('records');
 var db = firebase.firestore();
@@ -16,27 +17,28 @@ import addbg from '../assets/bg10.jpg';
 
 
 
+
 export default function AddItem ({navigation}){
  const [title, onChangeTitle] = React.useState('');
+ const [username, onChangeUsername] = React.useState('');
  const [pass, onChangePass] = React.useState('');
 
- let addItem = (title,pass) => {
+ let addItem = (title,username,pass) => {
   ref.add({
     name: title,
+    id: username,
     password: pass
-  }
-    
-  );
-  onChangePass('');
-  onChangeTitle('');
+  });
+  
 };
 
 const  handleSubmit = () => {
-    addItem(title,pass);
-    // Alert.alert('Item saved successfully','Do you wish to add more items',[
-    //   {text:'Yes',onPress:() => {}},
-    //   {text:'No',onPress:() => {navigation.navigate('Home');}}
-    // ]);
+    addItem(title,username,pass);
+    Alert.alert('Item saved successfully','Do you wish to add more items',[
+      {text:'Yes',onPress:() => {}},
+      {text:'No',onPress:() => {navigation.navigate('Home');}}
+    ]);
+    
   };
     return (
       <ImageBackground source={addbg} style={styles.bgimg}>
@@ -45,7 +47,7 @@ const  handleSubmit = () => {
         <Text>Website/App : </Text>
         <TextInput placeholder="www.gmail.com" style={styles.itemInput} onChangeText={text => onChangeTitle(text)} />
         <Text>Username : </Text>
-        <TextInput placeholder="xyz" value={title} style={styles.itemInput} onChangeText={text => onChangeTitle(text)} />
+        <TextInput placeholder="xyz" style={styles.itemInput} onChangeText={text => onChangeUsername(text)} />
         <Text>Password : </Text>
         <TextInput placeholder="***************"  value={pass} secureTextEntry style={styles.itemInput} onChangeText={text => onChangePass(text)} />
         <TouchableHighlight
