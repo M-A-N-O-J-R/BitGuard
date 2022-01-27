@@ -25,6 +25,19 @@ import {
   Oswald_600SemiBold,
   Oswald_700Bold 
 } from '@expo-google-fonts/oswald'
+import { 
+  Satisfy_400Regular 
+} from '@expo-google-fonts/satisfy'
+import { 
+  Merriweather_300Light,
+  Merriweather_300Light_Italic,
+  Merriweather_400Regular,
+  Merriweather_400Regular_Italic,
+  Merriweather_700Bold,
+  Merriweather_700Bold_Italic,
+  Merriweather_900Black,
+  Merriweather_900Black_Italic 
+} from '@expo-google-fonts/merriweather'
 const image = { uri: "https://hazlitt.net/sites/default/files/styles/article-header-image/public/field/image/gossip-illo-web.jpg?itok=ELA1gHGp" };
 
 
@@ -161,7 +174,9 @@ export default function SignupScreen({navigation}) {
   Oswald_400Regular,
   Oswald_500Medium,
   Oswald_600SemiBold,
-  Oswald_700Bold 
+  Oswald_700Bold,
+  Satisfy_400Regular,
+  Merriweather_700Bold
 });
 if(!fontsLoaded)
 {
@@ -173,7 +188,7 @@ if(!fontsLoaded)
    <ImageBackground source={require('../assets/bg8.jpg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
        
-    <Text style={styles.HeaderText}>Gossip..</Text>
+    <Text style={styles.HeaderText}>BitGaurd</Text>
       <KeyboardAvoidingView
        behavior="padding" style={styles.container2}
       >
@@ -344,10 +359,10 @@ const styles = StyleSheet.create({
   },
   HeaderText:
   {
-    fontSize:53,
+    fontSize:45,
     marginTop:60,
     marginBottom:40,
-    fontFamily:'Satisfy_400Regular',
+    fontFamily:'Merriweather_700Bold',
     color:'rgb(51,51,51)',
     letterSpacing:2,
   },
