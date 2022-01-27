@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import {
   View,
   Text,
@@ -18,6 +18,9 @@ let addItem = (title,pass) => {
   ref.add({
     name: title,
     password: pass
+  },()=>{
+    onChangePass('');
+    onChangeTitle('');
   });
 };
 
@@ -28,10 +31,10 @@ export default function AddItem ({navigation}){
 
 const  handleSubmit = () => {
     addItem(title,pass);
-    Alert.alert('Item saved successfully','Do you wish to add more items',[
-      {text:'Yes',onPress:() => {}},
-      {text:'No',onPress:() => {navigation.navigate('Home');}}
-    ]);
+    // Alert.alert('Item saved successfully','Do you wish to add more items',[
+    //   {text:'Yes',onPress:() => {}},
+    //   {text:'No',onPress:() => {navigation.navigate('Home');}}
+    // ]);
   };
     return (
       <ImageBackground source={addbg} style={styles.bgimg}>
@@ -40,9 +43,9 @@ const  handleSubmit = () => {
         <Text>Website/App : </Text>
         <TextInput placeholder="www.gmail.com" style={styles.itemInput} onChangeText={text => onChangeTitle(text)} />
         <Text>Username : </Text>
-        <TextInput placeholder="xyz" style={styles.itemInput} onChangeText={text => onChangeTitle(text)} />
+        <TextInput placeholder="xyz" value={title} style={styles.itemInput} onChangeText={text => onChangeTitle(text)} />
         <Text>Password : </Text>
-        <TextInput placeholder="***************" secureTextEntry style={styles.itemInput} onChangeText={text => onChangePass(text)} />
+        <TextInput placeholder="***************"  value={pass} secureTextEntry style={styles.itemInput} onChangeText={text => onChangePass(text)} />
         <TouchableHighlight
           style={styles.button}
           underlayColor="white"
