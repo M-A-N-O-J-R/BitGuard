@@ -8,7 +8,6 @@ import {
   Alert,
   ImageBackground,
 } from 'react-native';
-import { Formik } from 'formik';
 import firebase from '../firebase/fire'
 const ref=firebase.firestore().collection('records');
 var db = firebase.firestore();
