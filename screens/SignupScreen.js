@@ -14,7 +14,7 @@ import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons,Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-
+import { FontAwesome } from '@expo/vector-icons';
 
 import { getAuth, signInAnonymously } from "firebase/auth";
 import { 
@@ -66,8 +66,8 @@ export default function SignupScreen({navigation}) {
 
   const handleGoogleSignin=()=>{
     const config= {
-      iosClientId:`219284175146-6f1tq9uk0a6r76tjte6e6df59sqnj0dn.apps.googleusercontent.com`,
-      androidClientId:`219284175146-bvngane5ssmujvteiosg672mpdof6r5a.apps.googleusercontent.com`,
+      iosClientId:`997454642261-qofudfhigfgt49lkjhitmpqf7eqgbdkr.apps.googleusercontent.com`,
+      androidClientId:`997454642261-ctp71j1ouvrfdqi3pejc9sfc3h9ib709.apps.googleusercontent.com`,
       scopes: ['profile', 'email']
     }
     Google.logInAsync(config).then((result)=>
@@ -164,10 +164,13 @@ if(!fontsLoaded)
 
   return (
    <View style={styles.container1}> 
-   <ImageBackground source={require('../assets/bg8.jpg')} resizeMode="cover" style={styles.image}>
+   <ImageBackground source={require('../assets/sbg2.jpg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
-       
-    <Text style={styles.HeaderText}>Gossip..</Text>
+       <View style={{height: 100,...styles.title}}>
+          <Text style={styles.HeaderText}>BitGaurd</Text>
+          <FontAwesome name="shield" size={50} color="black" />
+       </View>
+    
       <KeyboardAvoidingView
        behavior="padding" style={styles.container2}
       >
@@ -198,17 +201,10 @@ if(!fontsLoaded)
       </View>
       <Text style={styles.otext}>--------------------or--------------------</Text>
       <View style={styles.otherLogin}>
-        <View style={styles.otherLogingrp}>
-          <TouchableOpacity onPress={()=>handleGoogleSignin()} style={styles.icons}>
-            {/* <AntDesign name="google" size={27} color="black" />
-                 */}
-            <Image source={require('../assets/google.png')} style={styles.gicon}/>    
-          </TouchableOpacity>
-          <Text style={styles.otext}>Google</Text>
-        </View>
-        
-        
-        
+          <TouchableOpacity onPress={()=>handleGoogleSignin()} style={styles.button3}>
+           <Image source={require('../assets/google.png')} style={styles.gicon}/>
+           <Text style={styles.btnText3}>Continue with Google</Text>
+        </TouchableOpacity>
       </View>
       
     </View>
@@ -218,6 +214,17 @@ if(!fontsLoaded)
 }
 
 const styles = StyleSheet.create({
+  title:
+  {
+    
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-around',
+    width:'55%',
+    marginTop:'2%',
+    marginBottom:'15%',
+
+  },
   link:
   {
     color:'rgb(0,149,247)',
@@ -235,8 +242,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius:7,
     justifyContent: 'flex-start',
-    borderColor: 'black',
-    
   },
   container: {
     flex: 1,
@@ -316,11 +321,11 @@ const styles = StyleSheet.create({
   otherLogin:
   {
     flexDirection:'row',
-    marginTop:30,
-    width:'80%',
+    marginTop:20,
+    width:'65%',
     justifyContent:'space-around',
     alignItems: 'center',
-    padding:20,
+    
   },
   otherLogingrp:
   {
@@ -336,11 +341,28 @@ const styles = StyleSheet.create({
   },
   HeaderText:
   {
-    fontSize:53,
-    marginTop:60,
-    marginBottom:40,
-    fontFamily:'Satisfy_400Regular',
+    fontSize:32,
+    fontFamily:'Merriweather_700Bold_Italic',
     color:'rgb(51,51,51)',
     letterSpacing:2,
+  },
+  button3:
+  {
+    padding:15,
+    alignItems:'center',
+    width:'100%',
+    borderRadius:5,
+    backgroundColor:'white',
+    flexDirection:'row',
+    justifyContent: 'center',
+    borderBottomLeftRadius:30,
+    borderTopLeftRadius:30,
+    borderBottomRightRadius:30,
+    borderTopRightRadius:30,
+    borderWidth: 1,
+  },
+  btnText3:{
+    color: 'black',
+    marginLeft:"5%",
   },
 });
