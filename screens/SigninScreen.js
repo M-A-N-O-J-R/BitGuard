@@ -81,8 +81,8 @@ export default function SignupScreen({navigation}) {
 
   const handleGoogleSignin=()=>{
     const config= {
-      iosClientId:`1008976412474-sq960nfh6lkmt78drl1rtesnhaginr7m.apps.googleusercontent.com`,
-      androidClientId:`1008976412474-rlnvorqui99k1i51ov04gmcq7l5qp7ss.apps.googleusercontent.com`,
+      iosClientId:`997454642261-qofudfhigfgt49lkjhitmpqf7eqgbdkr.apps.googleusercontent.com`,
+      androidClientId:`997454642261-ctp71j1ouvrfdqi3pejc9sfc3h9ib709.apps.googleusercontent.com`,
       scopes: ['profile', 'email']
     }
     Google.logInAsync(config).then((result)=>
