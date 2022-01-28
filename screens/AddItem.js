@@ -32,6 +32,7 @@ export default function AddItem ({navigation}){
  const [cvv, onChangeCVV] = React.useState('');
  const [ex1, onChangeEx1] = React.useState('');
  const [ex2, onChangeEx2] = React.useState('');
+ const [cardNote, onChangeCardNote] = React.useState('');
  
  const [idtitle, onChangeIdtitle] = React.useState('');
  const [idfname, onChangeIdfname] = React.useState('');
