@@ -1,52 +1,37 @@
-import { StyleSheet, Text, View,FlatList } from 'react-native';
-import React, { useState,useEffect } from 'react';
-import { FloatingAction } from "react-native-floating-action";
-import { Ionicons } from '@expo/vector-icons';
-import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
-import firebase from '../firebase/fire';
-import Firebase from 'firebase'
-import AppList from './AppList.js';
+import { StatusBar } from 'expo-status-bar';
+import React,{useEffect,useState} from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import firebase from '../firebase/fire'
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Foundation } from '@expo/vector-icons';
+import { Feather,AntDesign,Ionicons } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
+
+import Records from './Records';
+import Generate from './Generate';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
 
 
+const Tab = createBottomTabNavigator();
 
 
-const Home = ({navigation}) => {
-
-
-
-  const [val,setVal]=useState([
-    {
-      title:'Instagram',
-      username:'aravinth_26',
-      password:'raj@123',
-      Note:''
-  },
-  {
-      title:'Facebook',
-      username:'aravinth_26',
-      password:'raj@123',
-      Note:'gcfjck'
-  },
-  {
-      title:'Twitter',
-      username:'aravinth_26',
-      password:'raj@123',
-      Note:'jgcl'
-  },
-  {
-      title:'Github',
-      username:'aravinth_26',
-      password:'raj@123',
-      Note:'hyfuyg'
-  },
-  {
-      title:'Linkedin',
-      username:'aravinth_26',
-      password:'raj@123',
-      Note:'hgckygyt'
-  }
-  ]);
+  const [val,setVal]=useState([]);
 
   const ref=firebase.firestore().collection('records');
   
@@ -88,31 +73,60 @@ const Home = ({navigation}) => {
           <ActionButton.Item buttonColor='#9b59b6' title="Add" onPress={() => {console.log("notes tapped!");navigation.navigate('AddItem');}}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
-          
-          <ActionButton.Item buttonColor='#1abc9c' title="Update" onPress={() => {}}>
-            <Icon name="sync" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
 
-          <ActionButton.Item buttonColor='#3498db' title="Generate Password" onPress={() => {}}>
-            <Icon name="key" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-        </ActionButton>
-      </View>
+export default function App({navigation}) {
+  return (
+    <NavigationContainer independent={true}>
+      <Tab.Navigator          
+          tabBarOptions={
+          {
+           
+            labelStyle: 
+            {
+              fontSize: 12,
+            },
+			    }}
+          screenOptions={{headerShown:false}}>
+        <Tab.Screen name="Details" 
+         options={{
+            tabBarIcon: ({ color, size }) => (
+              <SimpleLineIcons name="notebook" size={24} color="black" />
+            )
+            
+          }}
+        >
+          {()=> <Records navigation={navigation}/>}
+        </Tab.Screen>
+        <Tab.Screen name="Generate Password" 
+         options={{
+            tabBarIcon: ({ color, size }) => (
+                <Foundation name="key" size={24} color="black" />
+            )
+            
+          }}
+        >
+          {()=> <Generate/>}
+        </Tab.Screen>
+        <Tab.Screen name="Settings" 
+         options={{
+           tabBarIcon:({ color,size})=>(
+            <AntDesign name="setting" size={24} color="black" />
+           )
+         }}
+        component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
-};
+}
 
-export default Home;
+
+
 
 const styles = StyleSheet.create({
-  actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
-    color: 'white',
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  container:{
-    flex:1,
-    backgroundColor:'lavender',
-    alignItems:'center',
-    justifyContent:'center'
-  }
 });

@@ -164,7 +164,7 @@ if(!fontsLoaded)
 
   return (
    <View style={styles.container1}> 
-   <ImageBackground source={require('../assets/sbg2.jpg')} resizeMode="cover" style={styles.image}>
+   <ImageBackground source={require('../assets/bg11.jpg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
        <View style={{height: 100,...styles.title}}>
           <Text style={styles.HeaderText}>BitGaurd</Text>
@@ -229,6 +229,7 @@ const styles = StyleSheet.create({
   {
     color:'rgb(0,149,247)',
     marginBottom:20,
+    fontWeight:"700",
   },
   icones:{
     marginLeft:17,
@@ -242,6 +243,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius:7,
     justifyContent: 'flex-start',
+    borderWidth:1,
   },
   container: {
     flex: 1,
