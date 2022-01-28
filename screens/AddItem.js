@@ -36,10 +36,14 @@ export default function AddItem ({navigation}){
 
 const  handleSubmit = () => {
     addItem(title,username,pass,note);
-    Alert.alert('Item saved successfully','Do you wish to add more items',[
-      {text:'Yes',onPress:() => {}},
-      {text:'No',onPress:() => {navigation.navigate('Home');}}
-    ]);
+    // Alert.alert('Item saved successfully','Do you wish to add more items',[
+    //   {text:'Yes',onPress:() => {}},
+    //   {text:'No',onPress:() => {navigation.navigate('Home');}}
+    // ]);
+    onChangeTitle('');
+    onChangeUsername('');
+    onChangePass('');
+    onChangeNote('');
     
   };
   const [selectedValue, setSelectedValue] = useState("java");
@@ -48,10 +52,10 @@ const  handleSubmit = () => {
       <View style={styles.main}>
         <Text style={styles.title}>Drop your passwords here!</Text>
         <Text>What type of item is this? </Text>
-        <View style={{backgroundColor:"gainsboro",width:170,borderRadius:10,padding:10}}>
+        <View style={{backgroundColor:"gainsboro",width:'100%',borderRadius:5,padding:10,borderWidth:1}}>
         <Picker
         selectedValue={selectedValue}
-        style={{ height: 25, width: 170, }}
+        style={{ height: 25, width: '100%', }}
         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
       >
         <Picker.Item label="Login" value="Login" />
@@ -61,13 +65,13 @@ const  handleSubmit = () => {
       </Picker>
       </View>
         <Text>Website/App : </Text>
-        <TextInput placeholder="www.gmail.com" style={styles.itemInput} onChangeText={text => onChangeTitle(text)} />
+        <TextInput placeholder="www.gmail.com" value={title} style={styles.itemInput} onChangeText={text => onChangeTitle(text)} />
         <Text>Username : </Text>
-        <TextInput placeholder="xyz" style={styles.itemInput} onChangeText={text => onChangeUsername(text)} />
+        <TextInput placeholder="xyz" style={styles.itemInput} value={username} onChangeText={text => onChangeUsername(text)} />
         <Text>Password : </Text>
         <TextInput placeholder="***************"  value={pass} secureTextEntry style={styles.itemInput} onChangeText={text => onChangePass(text)} />
         <Text>Note  :</Text>
-        <TextInput placeholder="(Optional)"style={[styles.itemInput,{height:250}]} onChangeText={text => onChangeNote(text)} />
+        <TextInput placeholder="(Optional)" style={[styles.itemInput]}  value={note} multiline onChangeText={text => onChangeNote(text)} />
         <TouchableHighlight
           style={styles.button}
           underlayColor="white"
@@ -94,7 +98,7 @@ const styles = StyleSheet.create({
     marginTop:40
   },
   title: {
-    marginBottom: 50,
+    marginBottom: 30,
     fontSize: 24,
     textAlign: 'center',
     
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
   itemInput: {  
     borderWidth: 1,
     borderColor: 'white',
-    borderRadius: 10,
+    borderRadius: 5,
     backgroundColor:'gainsboro',
     marginBottom:10,
     color: 'black',
@@ -122,7 +126,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     marginTop: 30,
-    width:100,
+    width:'100%',
     alignSelf: 'center',
     justifyContent: 'center'
   },
