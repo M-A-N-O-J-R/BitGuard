@@ -30,11 +30,54 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
+
+  const [val,setVal]=useState([]);
+
+  const ref=firebase.firestore().collection('records');
+  
+  async function getRecords() {
+    var user = firebase.auth().currentUser;
+    if(user!=null) {
+  
+        await ref.onSnapshot((querySnapshot) => {
+            const rec=[];
+            querySnapshot.forEach((doc)=>{
+            rec.push(doc.data());    
+            })
+            setVal(rec);
+        })
+    }
+  }
+  useEffect(()=>{
+    getRecords();
+  },[]);
+  
+  return (
+    <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
+        {
+          <View style={styles.container}>
+            <View>
+              <FlatList
+              keyExtractor={(item)=>item.title}
+              data={val}
+              
+              renderItem={({item})=>(
+                <AppList item={item}/>
+              )}
+              />
+              
+              </View>
+          </View>
+        }
+        <ActionButton size={60} buttonColor="rgba(231,76,60,1)">
+          <ActionButton.Item buttonColor='#9b59b6' title="Add" onPress={() => {console.log("notes tapped!");navigation.navigate('AddItem');}}>
+            <Icon name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+
 export default function App({navigation}) {
   return (
     <NavigationContainer independent={true}>
-      <Tab.Navigator
-          
+      <Tab.Navigator          
           tabBarOptions={
           {
            
