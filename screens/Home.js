@@ -19,27 +19,32 @@ const Home = ({navigation}) => {
     {
       title:'Instagram',
       username:'aravinth_26',
-      password:'raj@123'
+      password:'raj@123',
+      Note:''
   },
   {
       title:'Facebook',
       username:'aravinth_26',
-      password:'raj@123'
+      password:'raj@123',
+      Note:'gcfjck'
   },
   {
       title:'Twitter',
       username:'aravinth_26',
-      password:'raj@123'
+      password:'raj@123',
+      Note:'jgcl'
   },
   {
       title:'Github',
       username:'aravinth_26',
-      password:'raj@123'
+      password:'raj@123',
+      Note:'hyfuyg'
   },
   {
       title:'Linkedin',
       username:'aravinth_26',
-      password:'raj@123'
+      password:'raj@123',
+      Note:'hgckygyt'
   }
   ]);
 

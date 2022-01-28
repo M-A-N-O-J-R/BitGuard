@@ -9,6 +9,7 @@ export default  AppList= ({item}) => {
         <Text  >{item.id}</Text>
         <Text  >{item.name}</Text>
         <Text >{item.password}</Text>
+        <Text >{item.Note}</Text>
         </TouchableOpacity>      
     </View>
     
