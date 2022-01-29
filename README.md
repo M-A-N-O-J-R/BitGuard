@@ -1,5 +1,4 @@
 ## BitGaurd
-An application where one can post/message anonymously to registered users.
 
-1. Login Screen with google,email id, phone number and Anonymous login options given to the user.
-2. Global confessions visible to everyone
+BitGaurd is essentially an encrypted digital vault that stores secure password login information you use to access apps and accounts on your mobile device, websites and other services. In addition to keeping your identity, credentials and sensitive data safe, BitGaurd also has a password generator to create strong, unique passwords and ensure you aren't using the same password in multiple places (password generation really comes in clutch when you can't come up with yet another unique password on the fly for the latest must-have iOS app).
+
