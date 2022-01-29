@@ -300,7 +300,7 @@ const  handleCardSubmit = () => {
           <Text>Name : </Text>
             <TextInput placeholder="Enter the title here" style={styles.itemInput} value={stitle} onChangeText={text => onChangeSTitle(text)} />
             <Text>Note : </Text>
-            <TextInput placeholder="Enter your note here" style={[styles.itemInput,{height:150}]}  value={snote} multiline onChangeText={text => onChangeSNote(text)} />
+            <TextInput placeholder="Enter your note here" style={[styles.itemInput,{height:150,textAlignVertical: 'top'}]}  value={snote} multiline onChangeText={text => onChangeSNote(text)} />
             <TouchableHighlight
               style={styles.button}
               underlayColor="white"
