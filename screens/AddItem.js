@@ -55,7 +55,7 @@ export default function AddItem ({navigation}){
  const [snote, onChangeSNote] = React.useState('');
  const [type,setType]=useState('Login');
 
-
+ const [selectedValue, setSelectedValue] = useState("Login");
 
  let addItem = (title,username,pass,note) => {
   ref.add({
@@ -63,6 +63,7 @@ export default function AddItem ({navigation}){
     id: username,
     password: pass,
     Note:note,
+    type:selectedValue
   });
 };
 
@@ -73,8 +74,8 @@ let addCardItem = (cvv,cardName,cardNumber,ex1,ex2,Brand,cardNote) => {
     number:cardNumber,
     expr:ex1.concat('/'+ex2),
     cardbrand:Brand,
-    card_note:cardNote
-    
+    card_note:cardNote,
+    type:selectedValue
   });
 };
 
@@ -94,13 +95,15 @@ let addIdentityItem = (idtitle,idfname,idlname,idemail,idphone,idaadhar,idpasspo
     card_city:city,
     card_state:state,
     card_country:country,
-    card_zip:zip
+    card_zip:zip,
+    type:selectedValue
   });
 };
 let addnodeItem = (stitle,snote) => {
   ref.add({
     secure_name: stitle,
     secure_note: snote,
+    type:selectedValue
   });
 };
 const  handleIDSubmit = () => {
@@ -161,7 +164,7 @@ const  handleCardSubmit = () => {
     onChangeSNote('');
     
   };
-  const [selectedValue, setSelectedValue] = useState("Login");
+  
   if(selectedValue=='Card')
       {
         
