@@ -63,7 +63,7 @@ export default function AddItem ({navigation}){
     id: username,
     password: pass,
     Note:note,
-    type:selectedValue
+    Type:selectedValue
   });
 };
 
@@ -75,7 +75,7 @@ let addCardItem = (cvv,cardName,cardNumber,ex1,ex2,Brand,cardNote) => {
     expr:ex1.concat('/'+ex2),
     cardbrand:Brand,
     card_note:cardNote,
-    type:selectedValue
+    Type:selectedValue
   });
 };
 
@@ -96,14 +96,14 @@ let addIdentityItem = (idtitle,idfname,idlname,idemail,idphone,idaadhar,idpasspo
     card_state:state,
     card_country:country,
     card_zip:zip,
-    type:selectedValue
+    Type:selectedValue
   });
 };
 let addnodeItem = (stitle,snote) => {
   ref.add({
     secure_name: stitle,
     secure_note: snote,
-    type:selectedValue
+    Type:selectedValue
   });
 };
 const  handleIDSubmit = () => {
