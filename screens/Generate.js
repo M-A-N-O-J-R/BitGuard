@@ -7,7 +7,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { generatePassword } from '../screens/generatepasswords';
 import { Feather,AntDesign,Ionicons } from '@expo/vector-icons';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-
+import { MaterialCommunityIcons} from '@expo/vector-icons';
+import * as Clipboard from 'expo-clipboard';
 
 
 export default function App() {
@@ -17,7 +18,9 @@ export default function App() {
   const [upperCaseCount, setUpperCaseCount] = React.useState(0);
   const [symbolCount, setSymbolCount] = React.useState(0);
   const [digitCount, setDigitCount] = React.useState(0);
-
+  const copyText=(text)=>{
+    Clipboard.setString(text);
+  }
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Text style={{margin:10}}>Enter the number of lower case letter :</Text>
@@ -72,7 +75,12 @@ export default function App() {
         <Text style={styles.buttonText}>Generate</Text>
       </TouchableHighlight>
       <Text style={{marginTop:20}}>Generated Password :</Text>
-      <Text style={styles.pass}>{generatedPassword}</Text>
+      <View style={{flexDirection:'row',justifyContent:'space-around'}}>
+        <Text style={styles.pass}>{generatedPassword}</Text>
+      <TouchableHighlight onPress={()=>{copyText(generatedPassword)}}>
+        <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+        </TouchableHighlight>
+        </View>
     </KeyboardAvoidingView>
   );
 }
