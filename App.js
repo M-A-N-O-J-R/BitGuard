@@ -5,12 +5,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-import NumberScreen from './screens/NumberScreen'
+
 import SigninScreen from './screens/SigninScreen';
 import SignupScreen from './screens/SignupScreen';
 import HomeScreen from './screens/Home';
 import AddItem from './screens/AddItem';
-import OtpScreen from './screens/OTP';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
