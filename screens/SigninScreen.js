@@ -6,8 +6,6 @@ import firebase from '../firebase/fire';
 import Firebase from 'firebase'
 
 
-import ImageResizeMode from 'react-native/Libraries/Image/ImageResizeMode'
-
 import * as Google from 'expo-google-app-auth';
 import { AntDesign } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
@@ -80,20 +78,6 @@ export default function SignupScreen({navigation}) {
       console.error(err.message);
     })
   }
-
-  const isUserEqual=(googleUser, firebaseUser)=> {
-    if (firebaseUser) {
-      var providerData = firebaseUser.providerData;
-      for (var i = 0; i < providerData.length; i++) {
-        if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
-            providerData[i].uid === googleUser.getBasicProfile().getId()) {
-          // We don't need to reauth the Firebase connection.
-          return true;
-        }
-      }
-    }
-    return false;
-  }
   
   const signIn = async()=>{
     console.log(email);
@@ -127,7 +111,7 @@ if(!fontsLoaded)
 
   return (
    <View style={styles.container1}> 
-   <ImageBackground source={require('../assets/bg_rose.jpg')} resizeMode="cover" style={styles.image}>
+   <ImageBackground source={require('../assets/bg_blue.jpg')} resizeMode="cover" style={styles.image}>
     <View style={styles.container}>
        <View style={{height: 100,...styles.title}}>
           <Text style={styles.HeaderText}>BitGaurd</Text>
@@ -198,6 +182,7 @@ const styles = StyleSheet.create({
     color:'rgb(213,65,130)',
     marginBottom:20,
     fontWeight:"700",
+    
   },
   icones:{
     marginLeft:17,

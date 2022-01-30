@@ -362,18 +362,18 @@ const styles = StyleSheet.create({
     padding: 30,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: 'white',
     height:65,
     width:380,
     borderRadius:20,
     opacity:0.9,
-    marginTop:40
+    marginTop:40,
+    
   },
   title: {
     marginBottom: 70,
-    fontSize: 24,
+    fontSize: 22,
     textAlign: 'center',
-    
+    fontFamily:'Merriweather_700Bold_Italic'
   },
   itemInput: {  
     borderWidth: 1,
