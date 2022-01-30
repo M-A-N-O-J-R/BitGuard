@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useEffect,useState} from 'react';
-import { Button, KeyboardAvoidingView, StyleSheet, Text, View,TextInput } from 'react-native';
+import { Button, KeyboardAvoidingView, StyleSheet, Text, View,TextInput ,ImageBackground} from 'react-native';
 import firebase from '../firebase/fire'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { generatePassword } from '../screens/generatepasswords';
 import { Feather,AntDesign,Ionicons } from '@expo/vector-icons';
-import { TouchableHighlight } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { MaterialCommunityIcons} from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
 
@@ -14,16 +14,21 @@ import * as Clipboard from 'expo-clipboard';
 export default function App() {
 
   const [generatedPassword, setGeneratedPassword] = React.useState('');
-  const [lowerCaseCount, setLowerCaseCount] = React.useState(0);
-  const [upperCaseCount, setUpperCaseCount] = React.useState(0);
-  const [symbolCount, setSymbolCount] = React.useState(0);
-  const [digitCount, setDigitCount] = React.useState(0);
+  const [lowerCaseCount, setLowerCaseCount] = React.useState(4);
+  const [upperCaseCount, setUpperCaseCount] = React.useState(4);
+  const [symbolCount, setSymbolCount] = React.useState(2);
+  const [digitCount, setDigitCount] = React.useState(3);
   const copyText=(text)=>{
     Clipboard.setString(text);
+    setGeneratedPassword('');
+    
+    
   }
   return (
+    <ImageBackground source={require('../assets/bg11.jpg')} resizeMode="cover" style={styles.image}> 
     <KeyboardAvoidingView style={styles.container}>
-      <Text style={{margin:10}}>Enter the number of lower case letter :</Text>
+      <Text style={styles.title}>Generate Password</Text>
+      <Text style={{margin:10,backgroundColor:'white'}}>Enter the number of lower case letter :</Text>
       <TextInput
       keyboardType='numeric'
       style={styles.itemInput}
@@ -32,7 +37,7 @@ export default function App() {
           setLowerCaseCount(parseInt(value));
         }}
       />
-      <Text style={{margin:10}}>Enter the number of upper case letter :</Text>
+      <Text style={{margin:10,backgroundColor:'white'}}>Enter the number of upper case letter :</Text>
       <TextInput
       keyboardType='numeric'
       style={styles.itemInput}
@@ -41,7 +46,7 @@ export default function App() {
           setUpperCaseCount(parseInt(value));
         }}
       />
-      <Text style={{margin:10}}>Enter the number of symbols :</Text>
+      <Text style={{margin:10,backgroundColor:'white'}}>Enter the number of symbols :</Text>
       <TextInput
       keyboardType='numeric'
       style={styles.itemInput}
@@ -50,7 +55,7 @@ export default function App() {
           setSymbolCount(parseInt(value));
         }}
       />
-      <Text style={{margin:10}}>Enter the number of digits :</Text>
+      <Text style={{margin:10,backgroundColor:'white'}}>Enter the number of digits :</Text>
       <TextInput
       keyboardType='numeric'
       style={styles.itemInput}
@@ -59,9 +64,9 @@ export default function App() {
           setDigitCount(parseInt(value));
         }}
       />
-      <TouchableHighlight
-      style={styles.button}
-      underlayColor="black"
+      <TouchableOpacity
+      style={styles.button2}
+      
         onPress={() => {
           setGeneratedPassword(
             generatePassword(
@@ -72,16 +77,17 @@ export default function App() {
             )
           );
         }}>
-        <Text style={styles.buttonText}>Generate</Text>
-      </TouchableHighlight>
+        <Text style={styles.btnText2}>Generate</Text>
+      </TouchableOpacity>
       <Text style={{marginTop:20}}>Generated Password :</Text>
-      <View style={{flexDirection:'row',justifyContent:'space-around'}}>
-        <Text style={styles.pass}>{generatedPassword}</Text>
-      <TouchableHighlight onPress={()=>{copyText(generatedPassword)}}>
-        <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
-        </TouchableHighlight>
-        </View>
+      <View style={styles.button3}>
+        <Text styles={styles.btnText3}>{generatedPassword}</Text>
+        <TouchableOpacity onPress={()=>{copyText(generatedPassword)}}>
+          <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+        </TouchableOpacity>
+      </View>
     </KeyboardAvoidingView>
+    </ImageBackground>
   );
 }
 
@@ -89,49 +95,51 @@ export default function App() {
 
 
 const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    justifyContent: "center",
+  
+  },
   container: {
     flex:1,
     padding: 30,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
     height:65,
     width:'100%',
     borderRadius:20,
     opacity:0.9,
     marginTop:40
   },
-  button:{
-    height: 45,
-    flexDirection: 'row',
-    backgroundColor: 'lavender',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 10,
-    marginTop: 30,
-    width: '70%',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    borderWidth:2,
-    borderColor:'grey'
+  button2:
+  {
+    padding:15,
+    alignItems:'center',
+    width:'80%',
+    backgroundColor: 'black',
+    borderRadius:5,
+    marginBottom:30,
+    marginTop:25,
+    alignSelf:'center',
+    
+  },
+  btnText2:{
+    color: 'white',
+    fontSize:16,
   },
   itemInput: {  
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: 'black',
     borderRadius: 8,
-    backgroundColor:'gainsboro',
+    backgroundColor:'white',
     marginBottom:10,
     color: 'black',
     paddingHorizontal:15,
     paddingVertical:10,
     width:'95%'
   },
-  buttonText: {
-    fontSize: 20,
-    color: 'black',
-    alignSelf: 'center',
-    fontWeight:'700',
-  },
+
   pass:{
     
     margin:20,
@@ -141,5 +149,39 @@ const styles = StyleSheet.create({
     borderRadius:5,
     width:"90%",
     textAlign:'center'
-  }
+  },
+  button3:
+  {
+    padding:15,
+    alignItems:'center',
+    width:'93%',
+    borderRadius:5,
+    backgroundColor:'white',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    borderBottomLeftRadius:10,
+    borderTopLeftRadius:10,
+    borderBottomRightRadius:10,
+    borderTopRightRadius:10,
+    borderWidth: 1,
+    
+  },
+  btnText3:{
+    color: 'black',
+    marginLeft:"5%",
+    margin:20,
+    padding:20,
+    backgroundColor:'black',
+    color:'white',
+    borderRadius:5,
+    width:"90%",
+    textAlign:'center'
+  },
+  title: {
+    marginBottom: 40,
+    fontSize: 24,
+    textAlign: 'center',
+    fontFamily:'Merriweather_700Bold_Italic'
+    
+  },
 });
