@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
   itemInput: {  
     borderWidth: 1,
     borderColor: 'white',
-    borderRadius: 5,
+    borderRadius: 8,
     backgroundColor:'gainsboro',
     marginBottom:10,
     color: 'black',
