@@ -13,7 +13,7 @@ import {
 import firebase from '../firebase/fire'
 const ref=firebase.firestore().collection('records');
 var db = firebase.firestore();
-import addbg from '../assets/bg10.jpg';
+import addbg from '../assets/bg11.jpg';
 
 import { Feather,AntDesign,Ionicons,SimpleLineIcons,FontAwesome  } from '@expo/vector-icons';
 
@@ -172,7 +172,7 @@ const  handleCardSubmit = () => {
           <View style={styles.main}>
             <Text style={styles.title}>Card Details  <AntDesign name="creditcard" size={24} color="black" /></Text>
            
-            <Text>What type of item is this? </Text>
+            <Text style={{backgroundColor:'white'}}>What type of item is this? </Text>
             <View style={{backgroundColor:"gainsboro",width:'100%',borderRadius:5,padding:10,borderWidth:1}}>
             <Picker
             selectedValue={selectedValue}
@@ -287,7 +287,7 @@ const  handleCardSubmit = () => {
           <ImageBackground source={addbg} style={styles.bgimg}>
           <View style={styles.main}>
           <Text style={styles.title}>Notes  <FontAwesome name="sticky-note-o" size={24} color="black" /></Text>
-            <Text>What type of item is this? </Text>
+            <Text style={{backgroundColor:'white'}}>What type of item is this? </Text>
             <View style={{backgroundColor:"gainsboro",width:'100%',borderRadius:5,padding:10,borderWidth:1}}>
             <Picker
             selectedValue={selectedValue}
@@ -377,9 +377,9 @@ const styles = StyleSheet.create({
   },
   itemInput: {  
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: 'black',
     borderRadius: 8,
-    backgroundColor:'gainsboro',
+    backgroundColor:'rgba(255,255,255,0.8)',
     marginBottom:10,
     color: 'black',
     paddingHorizontal:15,
