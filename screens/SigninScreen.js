@@ -67,7 +67,7 @@ export default function SignupScreen({navigation}) {
           .catch((error) => {
             console.log(error);
           });
-        setTimeout(()=> navigation.navigate('Home',{email,name,photoUrl}),1000);
+        setTimeout(()=> navigation.navigate('Home',{email,name,photoUrl}),300);
       }
       else
       {
@@ -139,13 +139,14 @@ if(!fontsLoaded)
         <TouchableOpacity onPress={()=>{signIn()}} style={styles.button2}>
            <Text style={styles.btnText2}>Login</Text>
         </TouchableOpacity>
+        
         {/* <TouchableOpacity onPress={()=>{signUp()}} style={styles.button2}>
            <Text style={styles.btnText2} >register</Text>
         </TouchableOpacity> */}
         <TouchableOpacity onPress={()=>{navigation.navigate('Signup')}} style={{alignItems: 'center'}}>
            <Text style={styles.link}>Don't have an account? </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{}} style={{alignItems: 'center'}}>
+        <TouchableOpacity onPress={()=>{navigation.navigate('Home')}} style={{alignItems: 'center'}}>
            <Text style={styles.link}>Forgot password?</Text>
         </TouchableOpacity>
       </View>
