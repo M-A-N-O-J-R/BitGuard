@@ -8,7 +8,11 @@ import {
   Alert,
   ImageBackground,
   Picker,
-  ScrollView
+  ScrollView,
+  Modal,
+  Pressable,
+  TouchableOpacity,
+  Image
 } from 'react-native';
 import firebase from '../firebase/fire'
 const ref=firebase.firestore().collection('records');
@@ -23,7 +27,8 @@ var C = require("crypto-js");
 
 export default function AddItem ({navigation}){
 
-
+  const [modalVisible, setModalVisible] = useState(false);
+  
  const [title, onChangeTitle] = React.useState('');
  const [username, onChangeUsername] = React.useState('');
  const [pass, onChangePass] = React.useState('');
@@ -154,6 +159,7 @@ const  handleCardSubmit = () => {
   };
   const  handleSubmit = () => {
     addItem(title,username,pass,note);
+    
     // Alert.alert('Item saved successfully','Do you wish to add more items',[
     //   {text:'Yes',onPress:() => {}},
     //   {text:'No',onPress:() => {navigation.navigate('Home');}}
@@ -163,6 +169,7 @@ const  handleCardSubmit = () => {
     onChangePass('');
     onChangeNote('');
     
+    setModalVisible(true);
   };
   const  handlenoteSubmit = () => {
     addnodeItem(stitle,snote);
@@ -172,6 +179,8 @@ const  handleCardSubmit = () => {
     // ]);
     onChangeSTitle('');
     onChangeSNote('');
+
+    setModalVisible(true);
     
   };
   
@@ -220,7 +229,7 @@ const  handleCardSubmit = () => {
             <TouchableHighlight
               style={styles.button}
               underlayColor="white"
-              onPress={handleCardSubmit}
+              onPress={handleCardSubmit,setModalVisible(true)}
             >
               <Text style={styles.buttonText}>Add</Text>
             </TouchableHighlight>
@@ -297,6 +306,39 @@ const  handleCardSubmit = () => {
         return (
           
           <View style={styles.main}>
+            <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+          <View style={styles.modalBackGround}>
+           <View style={styles.modalContainer}>
+        <View style={{alignItems: 'center'}}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <Image
+                source={require('../assets/x.png')}
+                style={{height: 30, width: 30}}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Image
+            source={require('../assets/success.png')}
+            style={{height: 150, width: 150, marginVertical: 10}}
+          />
+        </View>
+
+        <Text style={{marginVertical: 30, fontSize: 20, textAlign: 'center'}}>
+          Your Login zdetails has been successfully added
+        </Text>
+        </View>
+        </View>
+      </Modal>
           <Text style={styles.title}>Notes  <FontAwesome name="sticky-note-o" size={24} color="black" /></Text>
             <Text >What type of item is this? </Text>
             <View style={{backgroundColor:"gainsboro",width:'100%',borderRadius:5,padding:10,borderWidth:1}}>
@@ -331,6 +373,39 @@ const  handleCardSubmit = () => {
         return (
           
           <View style={styles.main}>
+            <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+          <View style={styles.modalBackGround}>
+           <View style={styles.modalContainer}>
+        <View style={{alignItems: 'center'}}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <Image
+                source={require('../assets/x.png')}
+                style={{height: 30, width: 30}}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Image
+            source={require('../assets/success.png')}
+            style={{height: 150, width: 150, marginVertical: 10}}
+          />
+        </View>
+
+        <Text style={{marginVertical: 30, fontSize: 20, textAlign: 'center'}}>
+          Your Login zdetails has been successfully added
+        </Text>
+        </View>
+        </View>
+      </Modal>
             <Text style={styles.title}>Password Details <AntDesign name="login" size={24} color="black" /></Text>
             <Text>What type of item is this? </Text>
             <View style={{backgroundColor:"gainsboro",width:'100%',borderRadius:5,padding:10,borderWidth:1}}>
@@ -354,13 +429,18 @@ const  handleCardSubmit = () => {
             <TextInput placeholder="***************"  value={pass} secureTextEntry style={styles.itemInput} onChangeText={text => onChangePass(text)} />
             <Text>Note  :</Text>
             <TextInput placeholder="(Optional)" style={[styles.itemInput]}  value={note} multiline onChangeText={text => onChangeNote(text)} />
-            <TouchableHighlight
+            <TouchableOpacity
               style={styles.button}
               underlayColor="white"
               onPress={handleSubmit}
             >
               <Text style={styles.buttonText}>Add</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
+            {/* <View style={styles.button}
+              underlayColor="white"
+              onPress={handleSubmit}>
+                
+            </View> */}
           </View>
           
         );
@@ -425,5 +505,25 @@ const styles = StyleSheet.create({
        margin:10,
        color:'black',
        
-  }
+  },
+  modalBackGround: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    width: '80%',
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    borderRadius: 20,
+    elevation: 20,
+  },
+  header: {
+    width: '100%',
+    height: 40,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
 });

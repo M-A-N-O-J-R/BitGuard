@@ -32,10 +32,7 @@ export default  AppList= ({item}) => {
            
             <View >
             <TouchableOpacity style={styles.listContainer}>
-            <Text >{item.Type}</Text>
-            <Text  >{item.cardcvv}</Text>
-            <Text  >{item.cardholdername}</Text>
-            <Text >{item.cardbrand}</Text>
+            <Text >{item.Type}:{item.cardholdername}</Text>
             </TouchableOpacity>      
         </View>
             
@@ -47,11 +44,9 @@ export default  AppList= ({item}) => {
            
             <View >
                 <TouchableOpacity style={styles.listContainer}>
-                <Text >{item.Type}</Text>
-                <Text  >{item.Id_Firstname}</Text>
-                <Text  >{item.Id_Lastname}</Text>
-                <Text >{item.Idemail}</Text>
-                </TouchableOpacity>      
+                <Text >{item.Type}:{item.Id_Firstname}</Text>
+                </TouchableOpacity> 
+                     
             </View>
             
           );
@@ -62,9 +57,7 @@ export default  AppList= ({item}) => {
            
             <View >
                 <TouchableOpacity style={styles.listContainer}>
-                <Text >{item.Type}</Text>
-                <Text  >{item.secure_name}</Text>
-                <Text  >{item.secure_note}</Text>
+                <Text >{item.Type} : {item.secure_name}</Text>
                 </TouchableOpacity>      
             </View>
           );
@@ -86,11 +79,8 @@ export default  AppList= ({item}) => {
            
             <View >
                 <TouchableOpacity style={styles.listContainer}>
-                <Text >{item.Type}</Text>
-                <Text  >{item.id}</Text>
-                <Text  >{item.name}</Text>
+                <Text >{item.Type}:{item.name}</Text>
                 <Text >{item.password}</Text>
-                <Text >{item.Note}</Text>
                 {vis==false?<Text>{item.result}</Text>:<Text>{temp}</Text>}
                 <TouchableOpacity onPress={()=>{setVis(!vis)}}>{vis==false?<Feather name="eye" size={24} color="black" />:<Feather name="eye-off" size={24} color="black" />}</TouchableOpacity>
                 </TouchableOpacity>      

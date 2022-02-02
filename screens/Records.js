@@ -50,16 +50,17 @@ const Home = ({navigation}) => {
     var user = firebase.auth().currentUser;
     if(user!=null) {
   
-        await ref.where("id", "==", "Shashang").onSnapshot((querySnapshot) => {
+        await ref.onSnapshot((querySnapshot) => {
             const rec=[];
             querySnapshot.forEach((doc)=>{
-            
+            if(doc.data().Type=="Login")
+            {
+              var Decrypted = C.AES.decrypt(doc.data().password, "your password");
+              var result =Decrypted.toString(C.enc.Utf8);
+              rec.push({...doc.data(),result:result});
+              console.log(result); 
+            }
             // const encrypted = doc.data().pass.toString();
-            var Decrypted = C.AES.decrypt(doc.data().password, "your password");
-            var result =Decrypted.toString(C.enc.Utf8);
-            rec.push({...doc.data(),result:result});
-            console.log(result); 
-            
             })
             setVal(rec);
         })
@@ -74,15 +75,14 @@ const Home = ({navigation}) => {
         {
           <View style={styles.container}>
             <View >
-              <FlatList
+              {val.length>0?<FlatList
               keyExtractor={(item)=>item.title}
               data={val}
               
               renderItem={({item})=>(
                 <AppList item={item}/>
               )}
-              />
-              
+              />:<Text>no data</Text>}
               </View>
           </View>
         }
