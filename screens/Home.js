@@ -11,6 +11,7 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import Records from './Records';
 import Generate from './Generate';
 
+
 function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -70,6 +71,7 @@ export default function App({navigation}) {
            )
          }}
         component={SettingsScreen} />
+       
       </Tab.Navigator>
     </NavigationContainer>
   );

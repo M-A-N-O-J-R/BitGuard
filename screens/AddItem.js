@@ -16,10 +16,14 @@ var db = firebase.firestore();
 import addbg from '../assets/bg11.jpg';
 
 import { Feather,AntDesign,Ionicons,SimpleLineIcons,FontAwesome  } from '@expo/vector-icons';
+import CryptoES from "crypto-es";
+var C = require("crypto-js");
 
 
 
 export default function AddItem ({navigation}){
+
+
  const [title, onChangeTitle] = React.useState('');
  const [username, onChangeUsername] = React.useState('');
  const [pass, onChangePass] = React.useState('');
@@ -57,18 +61,22 @@ export default function AddItem ({navigation}){
  const [selectedValue, setSelectedValue] = useState("Login");
 
  let addItem = (title,username,pass,note) => {
+  
+  const encrypted = CryptoES.AES.encrypt(pass,"your password").toString();  
+ 
   ref.add({
     name: title,
     id: username,
-    password: pass,
+    password: encrypted,
     Note:note,
     Type:selectedValue
   });
 };
 
 let addCardItem = (cvv,cardName,cardNumber,ex1,ex2,Brand,cardNote) => {
+  const encrypted = CryptoES.AES.encrypt(cvv,"your password").toString();  
   ref.add({
-    cardcvv:cvv,
+    cardcvv:encrypted,
     cardholdername:cardName,
     number:cardNumber,
     expr:ex1.concat('/'+ex2),
@@ -79,13 +87,14 @@ let addCardItem = (cvv,cardName,cardNumber,ex1,ex2,Brand,cardNote) => {
 };
 
 let addIdentityItem = (idtitle,idfname,idlname,idemail,idphone,idaadhar,idpassport,idlicense,idnote,addr1,addr2,city,state,country,zip) => {
+  const aadharE = CryptoES.AES.encrypt(idaadhar,"your password").toString(); 
   ref.add({
     Idtitle:idtitle,
     Id_Firstname:idfname,
     Id_Lastname:idlname,
     Idemail:idemail,
     Idphone:idphone,
-    Idaadhar:idaadhar,
+    Idaadhar:aadharE,
     Idpassport:idpassport,
     Idlicense:idlicense,
     Idnote:idnote,
@@ -99,11 +108,13 @@ let addIdentityItem = (idtitle,idfname,idlname,idemail,idphone,idaadhar,idpasspo
   });
 };
 let addnodeItem = (stitle,snote) => {
+  const noteE = CryptoES.AES.encrypt(snote,"your password").toString(); 
   ref.add({
     secure_name: stitle,
-    secure_note: snote,
-    Type:selectedValue
+    secure_note: noteE,
+    Type:selectedValue,
   });
+  
 };
 const  handleIDSubmit = () => {
   addIdentityItem(idtitle,idfname,idlname,idemail,idphone,idaadhar,idpassport,idlicense,idnote,addr1,addr2,city,state,country,zip);
@@ -168,11 +179,11 @@ const  handleCardSubmit = () => {
       {
         
         return (
-          <ImageBackground source={addbg} style={styles.bgimg}>
+          
           <View style={styles.main}>
             <Text style={styles.title}>Card Details  <AntDesign name="creditcard" size={24} color="black" /></Text>
            
-            <Text style={{backgroundColor:'white'}}>What type of item is this? </Text>
+            <Text >What type of item is this? </Text>
             <View style={{backgroundColor:"gainsboro",width:'100%',borderRadius:5,padding:10,borderWidth:1}}>
             <Picker
             selectedValue={selectedValue}
@@ -215,13 +226,13 @@ const  handleCardSubmit = () => {
             </TouchableHighlight>
             
           </View>
-          </ImageBackground>
+          
         );
       }
       else if (selectedValue=='Identity') 
       {
         return (
-          <ImageBackground source={addbg} style={styles.bgimg}>
+          
           <View style={styles.main}>
           <Text style={styles.title}>Personal Details  <Ionicons name="person-circle-outline" size={24} color="black" /></Text>
             <ScrollView vertical={true}>
@@ -278,16 +289,16 @@ const  handleCardSubmit = () => {
             </TouchableHighlight>
             </ScrollView>
           </View>
-          </ImageBackground>
+         
         );
       } 
       else if (selectedValue=='Secure Note')
        {
         return (
-          <ImageBackground source={addbg} style={styles.bgimg}>
+          
           <View style={styles.main}>
           <Text style={styles.title}>Notes  <FontAwesome name="sticky-note-o" size={24} color="black" /></Text>
-            <Text style={{backgroundColor:'white'}}>What type of item is this? </Text>
+            <Text >What type of item is this? </Text>
             <View style={{backgroundColor:"gainsboro",width:'100%',borderRadius:5,padding:10,borderWidth:1}}>
             <Picker
             selectedValue={selectedValue}
@@ -312,13 +323,13 @@ const  handleCardSubmit = () => {
               <Text style={styles.buttonText}>Add</Text>
             </TouchableHighlight>
           </View>
-          </ImageBackground>
+         
         );
       } 
       else
        {
         return (
-          <ImageBackground source={addbg} style={styles.bgimg}>
+          
           <View style={styles.main}>
             <Text style={styles.title}>Password Details <AntDesign name="login" size={24} color="black" /></Text>
             <Text>What type of item is this? </Text>
@@ -351,23 +362,24 @@ const  handleCardSubmit = () => {
               <Text style={styles.buttonText}>Add</Text>
             </TouchableHighlight>
           </View>
-          </ImageBackground>
+          
         );
       } 
 }
 
 const styles = StyleSheet.create({
   main: {
-    flex:0.95,
-    padding: 30,
+    flex:1,
+    padding: 20,
     flexDirection: 'column',
     justifyContent: 'center',
     height:65,
-    width:380,
+    width:'100%',
     borderRadius:20,
-    opacity:0.9,
+    opacity:1,
     marginTop:40,
-    
+    backgroundColor:'lavender',
+    alignSelf:'center',
   },
   title: {
     marginBottom: 70,

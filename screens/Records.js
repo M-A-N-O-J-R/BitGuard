@@ -7,7 +7,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import firebase from '../firebase/fire';
 import Firebase from 'firebase'
 import AppList from './AppList.js';
-
+import { TouchableOpacity } from 'react-native-gesture-handler';
+var C = require("crypto-js");
 
 
 
@@ -16,31 +17,31 @@ const Home = ({navigation}) => {
 
 
   const [val,setVal]=useState([
-    {
-      title:'Instagram',
-      username:'aravinth_26',
-      password:'raj@123'
-  },
-  {
-      title:'Facebook',
-      username:'aravinth_26',
-      password:'raj@123'
-  },
-  {
-      title:'Twitter',
-      username:'aravinth_26',
-      password:'raj@123'
-  },
-  {
-      title:'Github',
-      username:'aravinth_26',
-      password:'raj@123'
-  },
-  {
-      title:'Linkedin',
-      username:'aravinth_26',
-      password:'raj@123'
-  }
+  //   {
+  //     title:'Instagram',
+  //     username:'aravinth_26',
+  //     password:'raj@123'
+  // },
+  // {
+  //     title:'Facebook',
+  //     username:'aravinth_26',
+  //     password:'raj@123'
+  // },
+  // {
+  //     title:'Twitter',
+  //     username:'aravinth_26',
+  //     password:'raj@123'
+  // },
+  // {
+  //     title:'Github',
+  //     username:'aravinth_26',
+  //     password:'raj@123'
+  // },
+  // {
+  //     title:'Linkedin',
+  //     username:'aravinth_26',
+  //     password:'raj@123'
+  // }
   ]);
 
   const ref=firebase.firestore().collection('records');
@@ -49,10 +50,16 @@ const Home = ({navigation}) => {
     var user = firebase.auth().currentUser;
     if(user!=null) {
   
-        await ref.onSnapshot((querySnapshot) => {
+        await ref.where("id", "==", "Shashang").onSnapshot((querySnapshot) => {
             const rec=[];
             querySnapshot.forEach((doc)=>{
-            rec.push(doc.data());    
+            
+            // const encrypted = doc.data().pass.toString();
+            var Decrypted = C.AES.decrypt(doc.data().password, "your password");
+            var result =Decrypted.toString(C.enc.Utf8);
+            rec.push({...doc.data(),result:result});
+            console.log(result); 
+            
             })
             setVal(rec);
         })
@@ -79,19 +86,22 @@ const Home = ({navigation}) => {
               </View>
           </View>
         }
-        <ActionButton size={60} buttonColor="rgba(231,76,60,1)">
+        {/* <ActionButton size={60} buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item buttonColor='#9b59b6' title="Add" onPress={() => {console.log("notes tapped!");navigation.navigate('AddItem');}}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
           
-          {/* <ActionButton.Item buttonColor='#1abc9c' title="Update" onPress={() => {}}>
+          <ActionButton.Item buttonColor='#1abc9c' title="Update" onPress={() => {}}>
             <Icon name="sync" style={styles.actionButtonIcon} />
           </ActionButton.Item>
 
           <ActionButton.Item buttonColor='#3498db' title="Generate Password" onPress={() => {}}>
             <Icon name="key" style={styles.actionButtonIcon} />
-          </ActionButton.Item> */}
-        </ActionButton>
+          </ActionButton.Item>
+        </ActionButton> */}
+        <TouchableOpacity >
+          <Ionicons name="add-circle-sharp" size={50} color="black" onPress={() => {navigation.navigate('AddItem');}} />
+        </TouchableOpacity>
       </View>
   );
 };
