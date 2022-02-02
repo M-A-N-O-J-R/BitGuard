@@ -142,6 +142,8 @@ const  handleIDSubmit = () => {
     onChangecountry('');
     onChangestate('');
     onChangezip('');
+
+    setModalVisible(true);
 };
 const  handleCardSubmit = () => {
     addCardItem(cvv,cardName,cardNumber,ex1,ex2,Brand,cardNote);
@@ -156,6 +158,8 @@ const  handleCardSubmit = () => {
     onChangeEx2('');
     onChangeBrand('');
     onChangeCardNote('');
+
+    setModalVisible(true);
   };
   const  handleSubmit = () => {
     addItem(title,username,pass,note);
@@ -190,6 +194,39 @@ const  handleCardSubmit = () => {
         return (
           
           <View style={styles.main}>
+            <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+          <View style={styles.modalBackGround}>
+           <View style={styles.modalContainer}>
+        <View style={{alignItems: 'center'}}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <Image
+                source={require('../assets/x.png')}
+                style={{height: 30, width: 30}}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Image
+            source={require('../assets/success.png')}
+            style={{height: 150, width: 150, marginVertical: 10}}
+          />
+        </View>
+
+        <Text style={{marginVertical: 30, fontSize: 20, textAlign: 'center'}}>
+          Your Card Detials has been successfully added
+        </Text>
+        </View>
+        </View>
+      </Modal>
             <Text style={styles.title}>Card Details  <AntDesign name="creditcard" size={24} color="black" /></Text>
            
             <Text >What type of item is this? </Text>
@@ -229,7 +266,7 @@ const  handleCardSubmit = () => {
             <TouchableHighlight
               style={styles.button}
               underlayColor="white"
-              onPress={handleCardSubmit,setModalVisible(true)}
+              onPress={handleCardSubmit}
             >
               <Text style={styles.buttonText}>Add</Text>
             </TouchableHighlight>
@@ -243,6 +280,39 @@ const  handleCardSubmit = () => {
         return (
           
           <View style={styles.main}>
+            <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+          <View style={styles.modalBackGround}>
+           <View style={styles.modalContainer}>
+        <View style={{alignItems: 'center'}}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <Image
+                source={require('../assets/x.png')}
+                style={{height: 30, width: 30}}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Image
+            source={require('../assets/success.png')}
+            style={{height: 150, width: 150, marginVertical: 10}}
+          />
+        </View>
+
+        <Text style={{marginVertical: 30, fontSize: 20, textAlign: 'center'}}>
+          Your Personal Details has been successfully added
+        </Text>
+        </View>
+        </View>
+      </Modal>
           <Text style={styles.title}>Personal Details  <Ionicons name="person-circle-outline" size={24} color="black" /></Text>
             <ScrollView vertical={true}>
             <Text>What type of item is this? </Text>
@@ -334,7 +404,7 @@ const  handleCardSubmit = () => {
         </View>
 
         <Text style={{marginVertical: 30, fontSize: 20, textAlign: 'center'}}>
-          Your Login zdetails has been successfully added
+          Your Secure Note has been successfully added
         </Text>
         </View>
         </View>
@@ -401,7 +471,7 @@ const  handleCardSubmit = () => {
         </View>
 
         <Text style={{marginVertical: 30, fontSize: 20, textAlign: 'center'}}>
-          Your Login zdetails has been successfully added
+          Your Login Details has been successfully added
         </Text>
         </View>
         </View>
