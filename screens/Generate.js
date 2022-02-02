@@ -25,10 +25,10 @@ export default function App() {
     
   }
   return (
-    <ImageBackground source={require('../assets/bg11.jpg')} resizeMode="cover" style={styles.image}> 
+    //<ImageBackground source={require('../assets/bg11.jpg')} resizeMode="cover" style={styles.image}> 
     <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.title}>Generate Password</Text>
-      <Text style={{margin:10,backgroundColor:'white'}}>Enter the number of lower case letter :</Text>
+      <Text style={{margin:10}}>Enter the number of lower case letter :</Text>
       <TextInput
       keyboardType='numeric'
       style={styles.itemInput}
@@ -37,7 +37,7 @@ export default function App() {
           setLowerCaseCount(parseInt(value));
         }}
       />
-      <Text style={{margin:10,backgroundColor:'white'}}>Enter the number of upper case letter :</Text>
+      <Text style={{margin:10}}>Enter the number of upper case letter :</Text>
       <TextInput
       keyboardType='numeric'
       style={styles.itemInput}
@@ -46,7 +46,7 @@ export default function App() {
           setUpperCaseCount(parseInt(value));
         }}
       />
-      <Text style={{margin:10,backgroundColor:'white'}}>Enter the number of symbols :</Text>
+      <Text style={{margin:10}}>Enter the number of symbols :</Text>
       <TextInput
       keyboardType='numeric'
       style={styles.itemInput}
@@ -55,7 +55,7 @@ export default function App() {
           setSymbolCount(parseInt(value));
         }}
       />
-      <Text style={{margin:10,backgroundColor:'white'}}>Enter the number of digits :</Text>
+      <Text style={{margin:10}}>Enter the number of digits :</Text>
       <TextInput
       keyboardType='numeric'
       style={styles.itemInput}
@@ -87,7 +87,7 @@ export default function App() {
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
-    </ImageBackground>
+   // </ImageBackground>
   );
 }
 
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     padding: 30,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor: 'lavender',
     height:65,
     width:'100%',
     borderRadius:20,

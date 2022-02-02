@@ -10,6 +10,7 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 
 import Records from './Records';
 import Generate from './Generate';
+import Crypt from './crypt'
 
 function HomeScreen() {
   return (
@@ -70,6 +71,13 @@ export default function App({navigation}) {
            )
          }}
         component={SettingsScreen} />
+        <Tab.Screen name="crypt" 
+         options={{
+           tabBarIcon:({ color,size})=>(
+            <AntDesign name="setting" size={24} color="black" />
+           )
+         }}
+        component={Crypt} />
       </Tab.Navigator>
     </NavigationContainer>
   );
