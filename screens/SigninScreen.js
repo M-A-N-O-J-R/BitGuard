@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-around',
-    width:'63%',
+    width:'55%',
     marginTop:'12%',
     marginBottom:'12%',
 
@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
   },
   HeaderText:
   {
-    fontSize:29,
+    fontSize:32,
     fontFamily:'Merriweather_700Bold_Italic',
     color:'rgb(51,51,51)',
     letterSpacing:2,
