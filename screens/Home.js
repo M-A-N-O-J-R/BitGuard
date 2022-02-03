@@ -56,8 +56,18 @@ function SettingsScreen() {
 
 const Tab = createBottomTabNavigator();
 
-export default function App({navigation}) {
+export default function App({navigation,route}) {
   const [showRealApp, setShowRealApp] = useState(false);
+  
+  useEffect(() => {
+    
+    console.log(route.params.screen);
+    if(route.params.screen=="signin")
+    {
+      setShowRealApp(true);
+    }
+    
+  },[route.params.screen]);
 
   const onDone = () => {
     setShowRealApp(true);
@@ -92,6 +102,7 @@ export default function App({navigation}) {
   };
 
   const RenderItem = ({item}) => {
+
     return (
       <View
         style={{
@@ -113,9 +124,11 @@ export default function App({navigation}) {
       </View>
     );
   };
+  
   return (
+    
     <>
-    {showRealApp!=0 ?(<NavigationContainer independent={true}>
+    {showRealApp!=0?(<NavigationContainer independent={true}>
       <Tab.Navigator          
           tabBarOptions={
           {

@@ -67,7 +67,7 @@ export default function SignupScreen({navigation}) {
           .catch((error) => {
             console.log(error);
           });
-        setTimeout(()=> navigation.navigate('Home',{email,name,photoUrl}),300);
+        setTimeout(()=> navigation.navigate('Home',{email,name,photoUrl,screen:"signin"}),300);
       }
       else
       {
@@ -83,7 +83,7 @@ export default function SignupScreen({navigation}) {
     console.log(email);
     console.log(password);
     firebase.auth().signInWithEmailAndPassword(email,password).then(()=>{
-      navigation.navigate('Home');
+      navigation.navigate('Home',{screen:"signin"});
     }).catch((err)=>{console.log(err.message)});
   }
 
