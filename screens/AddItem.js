@@ -216,8 +216,8 @@ const  handleCardSubmit = () => {
         </View>
         <View style={{alignItems: 'center'}}>
           <Image
-            source={require('../assets/success.png')}
-            style={{height: 150, width: 150, marginVertical: 10}}
+            source={require('../assets/s14.png')}
+            style={{height: 200, width: 220, marginVertical: 10}}
           />
         </View>
 
@@ -302,8 +302,8 @@ const  handleCardSubmit = () => {
         </View>
         <View style={{alignItems: 'center'}}>
           <Image
-            source={require('../assets/success.png')}
-            style={{height: 150, width: 150, marginVertical: 10}}
+            source={require('../assets/s21.png')}
+            style={{height: 200, width: 220, marginVertical: 10}}
           />
         </View>
 
@@ -396,10 +396,10 @@ const  handleCardSubmit = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{alignItems: 'center'}}>
+        <View style={{alignItems: 'center',}}>
           <Image
-            source={require('../assets/success.png')}
-            style={{height: 150, width: 150, marginVertical: 10}}
+            source={require('../assets/s18.png')}
+            style={{height: 200, width: 220, marginVertical: 10}}
           />
         </View>
 
@@ -465,8 +465,8 @@ const  handleCardSubmit = () => {
         </View>
         <View style={{alignItems: 'center'}}>
           <Image
-            source={require('../assets/success.png')}
-            style={{height: 150, width: 150, marginVertical: 10}}
+            source={require('../assets/s19.png')}
+            style={{height: 200, width: 220, marginVertical: 10}}
           />
         </View>
 
@@ -567,7 +567,7 @@ const styles = StyleSheet.create({
   bgimg:{
     flex:1,
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
   },
   pick:{
      height: 50,
