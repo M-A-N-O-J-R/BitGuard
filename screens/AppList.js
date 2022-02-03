@@ -10,10 +10,14 @@ import {
     Alert,
     ImageBackground,
     Picker,
-    ScrollView
+    ScrollView,
+    Modal,
+    Image,
+    Pressable
   } from 'react-native';
-import { Feather } from '@expo/vector-icons';  
+import { Feather,Ionicons } from '@expo/vector-icons';  
 export default  AppList= ({item}) => {
+  
 //   return (
     // <View >
     //     <TouchableOpacity style={styles.listContainer}>
@@ -25,6 +29,7 @@ export default  AppList= ({item}) => {
     //     </TouchableOpacity>      
     // </View>
     const [selectedValue, setSelectedValue] = useState(item.Type);
+    
     if(selectedValue=='Card')
         {
           
@@ -64,7 +69,9 @@ export default  AppList= ({item}) => {
         } 
         else
          {
+          
           const [vis,setVis]=useState(true);
+          const [modalOpen,setmodalOpen]=useState(false);
           var len=0;
           if(item.result)
           {
@@ -77,13 +84,42 @@ export default  AppList= ({item}) => {
          }
           return (
            
-            <View >
-                <TouchableOpacity style={styles.listContainer}>
+            <View>
+            
+                <TouchableOpacity style={styles.listContainer} onPress={()=>setmodalOpen(true)}>
                 <Text >{item.Type}:{item.name}</Text>
-                <Text >{item.password}</Text>
+              {/* <Text >{item.password}</Text>
                 {vis==false?<Text>{item.result}</Text>:<Text>{temp}</Text>}
-                <TouchableOpacity onPress={()=>{setVis(!vis)}}>{vis==false?<Feather name="eye" size={24} color="black" />:<Feather name="eye-off" size={24} color="black" />}</TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setVis(!vis)}}>{vis==false?<Feather name="eye" size={24} color="black" />:<Feather name="eye-off" size={24} color="black" />}
+          </TouchableOpacity>*/}
                 </TouchableOpacity>      
+                <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalOpen}
+        onRequestClose={() => {setmodalOpen(false)}}>
+        <View style={styles.centeredView} onPressOut={() => {setmodalOpen(false)}}>
+        
+          <View style={styles.modalView} >
+          
+            <Text style={styles.modalText}>Hellhfhffho World!</Text>
+            
+          </View>
+        </View>
+
+      </Modal>
+
+      {/* <Modal visible={modalOpen} animationType="slide"
+        transparent={true}>
+            <Ionicons name="close-sharp" size={24} color="black" onPress={()=>setmodalOpen(false)} style={styles.btnClose}/>
+            <View style={styles.modalContent}>
+              
+              <Text>hiiii</Text>
+            </View>
+      
+         </Modal> */}
+
+
             </View>
             
  
@@ -97,8 +133,8 @@ const styles = StyleSheet.create({
         borderRadius:10,
         marginBottom:5,
         marginTop:10,
-        width:420,
-        height:400,
+        width:360,
+        height:60,
         flexDirection:'column',
         justifyContent:'center',
     },
@@ -119,5 +155,49 @@ const styles = StyleSheet.create({
         fontSize:12,
         color:'white',
         fontWeight:"200"
-    }
+    },
+
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+ 
+    
 });
