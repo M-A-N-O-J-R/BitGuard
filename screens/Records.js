@@ -71,7 +71,7 @@ const Home = ({navigation}) => {
   },[]);
   
   return (
-    <View style={{flex:1, backgroundColor: '#f3f3f3'}}>
+    <View style={{flex:1,backgroundColor:'lavender',marginTop:40}}>
         {
           <View style={styles.container}>
             <View >
@@ -99,8 +99,8 @@ const Home = ({navigation}) => {
             <Icon name="key" style={styles.actionButtonIcon} />
           </ActionButton.Item>
         </ActionButton> */}
-        <TouchableOpacity >
-          <Ionicons name="add-circle-sharp" size={50} color="black" onPress={() => {navigation.navigate('AddItem');}} />
+        <TouchableOpacity style={{backgroundColor:'lavender',margin:10,marginLeft:'80%'}}>
+          <Ionicons name="add-circle-sharp" size={55} color="black" onPress={() => {navigation.navigate('AddItem');}} />
         </TouchableOpacity>
       </View>
   );
