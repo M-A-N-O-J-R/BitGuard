@@ -10,10 +10,13 @@ import {
     Alert,
     ImageBackground,
     Picker,
-    ScrollView
+    ScrollView,
+    Modal,
+    Image
   } from 'react-native';
 import { Feather } from '@expo/vector-icons';  
 export default  AppList= ({item}) => {
+  
 //   return (
     // <View >
     //     <TouchableOpacity style={styles.listContainer}>
@@ -25,6 +28,7 @@ export default  AppList= ({item}) => {
     //     </TouchableOpacity>      
     // </View>
     const [selectedValue, setSelectedValue] = useState(item.Type);
+    
     if(selectedValue=='Card')
         {
           
@@ -64,6 +68,7 @@ export default  AppList= ({item}) => {
         } 
         else
          {
+          
           const [vis,setVis]=useState(true);
           var len=0;
           if(item.result)
@@ -77,13 +82,16 @@ export default  AppList= ({item}) => {
          }
           return (
            
-            <View >
-                <TouchableOpacity style={styles.listContainer}>
+            <View>
+            
+                <TouchableOpacity style={styles.listContainer} >
                 <Text >{item.Type}:{item.name}</Text>
-                <Text >{item.password}</Text>
+              {/* <Text >{item.password}</Text>
                 {vis==false?<Text>{item.result}</Text>:<Text>{temp}</Text>}
-                <TouchableOpacity onPress={()=>{setVis(!vis)}}>{vis==false?<Feather name="eye" size={24} color="black" />:<Feather name="eye-off" size={24} color="black" />}</TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setVis(!vis)}}>{vis==false?<Feather name="eye" size={24} color="black" />:<Feather name="eye-off" size={24} color="black" />}
+          </TouchableOpacity>*/}
                 </TouchableOpacity>      
+                 
             </View>
             
  
@@ -97,8 +105,8 @@ const styles = StyleSheet.create({
         borderRadius:10,
         marginBottom:5,
         marginTop:10,
-        width:420,
-        height:400,
+        width:360,
+        height:60,
         flexDirection:'column',
         justifyContent:'center',
     },
@@ -119,5 +127,6 @@ const styles = StyleSheet.create({
         fontSize:12,
         color:'white',
         fontWeight:"200"
-    }
+    },
+    
 });
