@@ -139,25 +139,16 @@ export default  AppList= ({item}) => {
                 visible={modalOpen}
                 animationType={'slide'}
                 >
-                    <View style={{flex:1,backgroundColor:'white'}}>
-                    <Ionicons name="close-sharp" size={36} color="dimgrey"  onPress={()=>setmodalOpen(false)} style={{marginLeft:390}}/>
-                    <View style={{marginTop:100,justifyContent:'center'}}>                
-                  <Text style={{margin:10,fontSize:24}}>Title : </Text>
-                  <View style={styles.button3}>
-                  <Text styles={styles.btnText3}>{item.secure_name}</Text>
-                  <TouchableOpacity onPress={()=>{copyText(item.secure_name)}}>
-                    <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
-                  </TouchableOpacity>
-                </View>
-                <Text style={{margin:10,fontSize:24}}>Note : </Text>
-                  <View style={styles.button3}>
-                  <Text styles={styles.btnText3}>{item.result}</Text>
-                  <TouchableOpacity onPress={()=>{copyText(item.result)}}>
-                    <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
-                  </TouchableOpacity>
-                </View>
-                 </View>
-                  </View>
+                <Ionicons name="close-sharp" size={36} color="dimgrey"  onPress={()=>setmodalOpen(false)} style={{marginLeft:390}}/>
+                  <View style={styles.main}>
+            <ScrollView vertical={true}>           
+            <Text style={styles.title}>Secure Note    <AntDesign name="person-circle-outline" size={24} color="black" /></Text>           
+            <Text style={{marginTop:10}}>Title : </Text>
+            <Text style={styles.itemInput}>{item.secure_name}</Text>
+           <Text>Note : </Text>
+           <Text style={styles.itemInput}>{item.result}</Text>
+            </ScrollView>
+            </View>
                 </Modal>
             </View>
           );
@@ -185,40 +176,20 @@ export default  AppList= ({item}) => {
                 visible={modalOpen}
                 animationType={'slide'}
                 >
-                    <View style={{flex:1,backgroundColor:'white'}}>
                     <Ionicons name="close-sharp" size={36} color="dimgrey"  onPress={()=>setmodalOpen(false)} style={{marginLeft:390}}/>
-                    <View style={{marginTop:100,justifyContent:'center'}}>
-                    <Text style={{margin:10,fontSize:24}}>Title : </Text>
-                  <View style={styles.button3}>
-                  <Text styles={styles.btnText3}>{item.name}</Text>
-                  <TouchableOpacity onPress={()=>{copyText(item.name)}}>
-                    <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
-                  </TouchableOpacity>
-                </View>
-                  <Text style={{margin:10,fontSize:24}}>Username : </Text>
-                  <View style={styles.button3}>
-                  <Text styles={styles.btnText3}>{item.id}</Text>
-                  <TouchableOpacity onPress={()=>{copyText(item.id)}}>
-                    <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
-                  </TouchableOpacity>
-                </View>
-                  <Text style={{margin:10,fontSize:24}}>Password : </Text>
-                  <View style={styles.button3}>
-                  <Text styles={styles.btnText3}>{item.result}</Text>
-                  <TouchableOpacity onPress={()=>{copyText(item.result)}}>
-                    <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
-                  </TouchableOpacity>
-                </View>
-                  <Text style={{margin:10,fontSize:24}}>Note : </Text>
-                  <View style={styles.button3}>
-                  <Text styles={styles.btnText3}>{item.Note}</Text>
-                  <TouchableOpacity onPress={()=>{copyText(item.Note)}}>
-                    <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
-                  </TouchableOpacity>
-                </View>
-                  
-                 </View>
-                  </View>
+                  <View style={styles.main}>
+            <ScrollView vertical={true}>           
+            <Text style={styles.title}>Password Details <AntDesign name="login" size={24} color="black" /></Text>
+            <Text style={{marginTop:10}}>Website/App : </Text>
+            <Text style={styles.itemInput}>{item.name}</Text>
+            <Text>Username : </Text>
+            <Text style={styles.itemInput}>{item.id}</Text>
+            <Text>Password : </Text>
+            <Text style={styles.itemInput}>{item.result}</Text>
+            <Text>Note  :</Text>    
+            <Text style={styles.itemInput}>{item.Note}</Text>        
+            </ScrollView>
+            </View>
                 </Modal>
             </View>
   );
