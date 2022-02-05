@@ -19,10 +19,7 @@ export default function App() {
   const [symbolCount, setSymbolCount] = React.useState(2);
   const [digitCount, setDigitCount] = React.useState(3);
   const copyText=(text)=>{
-    Clipboard.setString(text);
-    setGeneratedPassword('');
-    
-    
+    Clipboard.setString(text);  
   }
   return (
     //<ImageBackground source={require('../assets/bg11.jpg')} resizeMode="cover" style={styles.image}> 
@@ -66,7 +63,6 @@ export default function App() {
       />
       <TouchableOpacity
       style={styles.button2}
-      
         onPress={() => {
           setGeneratedPassword(
             generatePassword(
