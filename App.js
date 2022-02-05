@@ -4,14 +4,11 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-
-
 import SigninScreen from './screens/SigninScreen';
 import SignupScreen from './screens/SignupScreen';
 import HomeScreen from './screens/Home';
 import AddItem from './screens/AddItem';
-import { Ionicons } from '@expo/vector-icons';
-import { TouchableHighlight } from 'react-native-gesture-handler';
+
 
 const Stack = createNativeStackNavigator();
 
