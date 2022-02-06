@@ -8,7 +8,7 @@ import SigninScreen from './screens/SigninScreen';
 import SignupScreen from './screens/SignupScreen';
 import HomeScreen from './screens/Home';
 import AddItem from './screens/AddItem';
-
+import Biometric from './screens/biometric';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +16,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen options={{headerShown:false}} name="Biometric" component={Biometric} />
       <Stack.Screen options={{headerShown:false}} name="Signin" component={SigninScreen} />
       <Stack.Screen options={{headerShown:false}} name="Signup" component={SignupScreen} />
       {/* <Stack.Screen options={{ title: 'My Vault',headerTitleAlign: "center",headerStyle: {
@@ -35,6 +36,7 @@ function App() {
           ), }} name="Home" component={HomeScreen} /> */}
         <Stack.Screen options={{headerShown:false}} name="Home" component={HomeScreen} />
         <Stack.Screen options={{headerShown:false}} name="AddItem" component={AddItem} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

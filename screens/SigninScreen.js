@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Image,ImageBackground,StyleSheet, Text, View ,TextInput,TouchableOpacity,Button,KeyboardAvoidingView} from 'react-native';
 
 import firebase from '../firebase/fire';
@@ -15,7 +15,10 @@ import AppLoading from 'expo-app-loading';
 import { FontAwesome } from '@expo/vector-icons'; 
 
 
-import { getAuth, signInAnonymously } from "firebase/auth";
+
+import * as LocalAuthentication from 'expo-local-authentication';
+
+
 import { 
   Oswald_200ExtraLight,
   Oswald_300Light,
@@ -39,7 +42,6 @@ import {
 } from '@expo-google-fonts/merriweather'
 
 export default function SignupScreen({navigation}) {
-  
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
 
