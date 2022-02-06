@@ -60,6 +60,26 @@ const Home = ({navigation}) => {
               rec.push({...doc.data(),result:result});
               console.log(result); 
             }
+            else if(doc.data().Type=="Identity")
+            {
+              var Decrypted = C.AES.decrypt(doc.data().Idaadhar, "your password");
+              var result =Decrypted.toString(C.enc.Utf8);
+              rec.push({...doc.data(),result:result});
+              console.log(result); 
+            }
+            else if(doc.data().Type=="Secure Note")
+            {
+              var Decrypted = C.AES.decrypt(doc.data().secure_note, "your password");
+              var result =Decrypted.toString(C.enc.Utf8);
+              rec.push({...doc.data(),result:result});
+              console.log(result);               
+            }
+            else{
+              const Decrypted = C.AES.decrypt(doc.data().cardcvv,"your password");
+              var result =Decrypted.toString(C.enc.Utf8);
+              rec.push({...doc.data(),result:result});
+              console.log(result); 
+            }
             // const encrypted = doc.data().pass.toString();
             })
             setVal(rec);
