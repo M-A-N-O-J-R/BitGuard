@@ -1,6 +1,6 @@
 ## BitGaurd
 
-BitGaurd is an encrypted digital vault that stores secure password login information you use to access apps and accounts on your mobile device, websites and other services. In addition to keeping your identity, credentials and sensitive data safe, BitGaurd also has a password generator to create strong, unique passwords and ensure you aren't using the same password in multiple places.
+BitGaurd is an encrypted digital vault with biometric protection that stores secure password login information you use to access apps and accounts on your mobile device, websites and other services. In addition to keeping your identity, credentials and sensitive data safe, BitGaurd also has a password generator to create strong, unique passwords and ensure you aren't using the same password in multiple places. 
 
 Forgot Password ? 
 NO..Forget Password!
