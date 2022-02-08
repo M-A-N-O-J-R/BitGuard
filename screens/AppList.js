@@ -17,8 +17,19 @@ import {
   } from 'react-native';
 import { AntDesign, Feather,Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';  
 import * as Clipboard from 'expo-clipboard';
+import firebase from '../firebase/fire'
+
 
 export default  AppList= ({item}) => {
+  {/*const ref=firebase.firestore().collection('records');
+  let deleteCardItem=({item.cardholdername})=>{
+    if(doc().cardholdername==)
+    ref.doc().delete().then(() => {
+      console.log("Document successfully deleted!");
+  }).catch((error) => {
+      console.error("Error removing document: ", error);
+  });
+  };*/}
   const [modalOpen,setmodalOpen]=useState(false);
           const copyText=(text)=>{
             Clipboard.setString(text);      
@@ -40,7 +51,13 @@ export default  AppList= ({item}) => {
            
             <View >
             <TouchableOpacity style={styles.listContainer} onPress={()=>setmodalOpen(true)}>
-            <Text >{item.Type}:{item.cardholdername}</Text>
+              <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+              <Text >{item.Type}:{item.cardholdername}</Text>
+              <TouchableOpacity onPress={()=>{}}>
+          <MaterialCommunityIcons name="delete-outline" size={24} color="dimgrey"/>
+        </TouchableOpacity>
+              </View>
+            
             <Modal
                 visible={modalOpen}
                 animationType={'slide'}
@@ -80,7 +97,12 @@ export default  AppList= ({item}) => {
            
             <View >
                 <TouchableOpacity style={styles.listContainer} onPress={()=>setmodalOpen(true)}>
+                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                 <Text >{item.Type}:{item.Id_Firstname}</Text>
+                <TouchableOpacity onPress={()=>{}}>
+          <MaterialCommunityIcons name="delete-outline" size={24} color="dimgrey"/>
+        </TouchableOpacity>
+        </View>
                 </TouchableOpacity> 
                 <Modal
                 visible={modalOpen}
@@ -133,7 +155,12 @@ export default  AppList= ({item}) => {
            
             <View >
                 <TouchableOpacity style={styles.listContainer} onPress={()=>setmodalOpen(true)}>
+                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                 <Text >{item.Type} : {item.secure_name}</Text>
+                <TouchableOpacity onPress={()=>{}}>
+          <MaterialCommunityIcons name="delete-outline" size={24} color="dimgrey"/>
+        </TouchableOpacity>
+        </View>
                 </TouchableOpacity>   
                 <Modal
                 visible={modalOpen}
@@ -170,7 +197,14 @@ export default  AppList= ({item}) => {
             <View>
               
                 <TouchableOpacity style={styles.listContainer} onPress={()=>setmodalOpen(true)}>
+                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                 <Text >{item.Type}:{item.name}</Text>
+                <TouchableOpacity onPress={()=>{
+                  console.log("pressedd");
+                }}>
+          <MaterialCommunityIcons name="delete-outline" size={24} color="dimgrey"/>
+        </TouchableOpacity>
+        </View>
                 </TouchableOpacity>      
                 <Modal
                 visible={modalOpen}
