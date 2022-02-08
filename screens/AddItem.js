@@ -17,7 +17,7 @@ import {
 import firebase from '../firebase/fire'
 const ref=firebase.firestore().collection('records');
 var db = firebase.firestore();
-import addbg from '../assets/bg11.jpg';
+
 
 import { Feather,AntDesign,Ionicons,SimpleLineIcons,FontAwesome  } from '@expo/vector-icons';
 import CryptoES from "crypto-es";
