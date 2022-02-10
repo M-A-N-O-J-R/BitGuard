@@ -82,7 +82,7 @@ export default function Help()
       }
       
    return(
-      <KeyboardAvoidingView style={{flex: 1}}>
+      <KeyboardAvoidingView style={{flex: 1,backgroundColor:'lavender'}}>
            
             <KeyboardAvoidingView style={styles.container}>
                 

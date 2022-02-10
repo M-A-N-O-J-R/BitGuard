@@ -240,10 +240,12 @@ const styles = StyleSheet.create({
     modalContent: 
     {
         flex:1,
+        
     },
     btnClose:
     {
         marginLeft:360,
         marginTop:5,
+        
     },
 })

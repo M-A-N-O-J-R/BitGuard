@@ -159,13 +159,14 @@ const styles = StyleSheet.create({
   },
   main:
   {
-      flex:1
+      flex:1,
+      backgroundColor:'lavender'
   },
     container:{
         flex : 1,
         alignItems:'center',
         justifyContent: 'space-evenly',
-        backgroundColor: '#EEE',
+        backgroundColor: 'lavender',
     },
     cont2:
     {

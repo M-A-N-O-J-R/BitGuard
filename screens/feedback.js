@@ -78,7 +78,7 @@ export default function Feedback({msg})
       }
       
    return(
-      <KeyboardAvoidingView style={{flex: 1}}>
+      <KeyboardAvoidingView style={{flex: 1,backgroundcolor:'lavender'}}>
             
             <KeyboardAvoidingView style={styles.container}>
                 
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         marginLeft:30,
         marginRight:30,
         borderRadius:10,
-        backgroundColor:'#rgb(252,253,252)',
+        backgroundColor:'lavender',
 
         elevation: 3,
         shadowOffset: { width: 1, height: 1 },
