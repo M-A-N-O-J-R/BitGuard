@@ -23,7 +23,12 @@ import { Feather,AntDesign,Ionicons,SimpleLineIcons,FontAwesome  } from '@expo/v
 import CryptoES from "crypto-es";
 var C = require("crypto-js");
 
-
+var gen_ID = function () {
+  // Math.random should be unique because of its seeding algorithm.
+  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+  // after the decimal.
+  return '_' + Math.random().toString(36).substr(2, 9);
+};
 
 export default function AddItem ({navigation}){
 
@@ -74,7 +79,8 @@ export default function AddItem ({navigation}){
     id: username,
     password: encrypted,
     Note:note,
-    Type:selectedValue
+    Type:selectedValue,
+    UID:gen_ID()
   });
 };
 
@@ -87,7 +93,8 @@ let addCardItem = (cvv,cardName,cardNumber,ex1,ex2,Brand,cardNote) => {
     expr:ex1.concat('/'+ex2),
     cardbrand:Brand,
     card_note:cardNote,
-    Type:selectedValue
+    Type:selectedValue,
+    UID:gen_ID()
   });
 };
 
@@ -109,7 +116,8 @@ let addIdentityItem = (idtitle,idfname,idlname,idemail,idphone,idaadhar,idpasspo
     card_state:state,
     card_country:country,
     card_zip:zip,
-    Type:selectedValue
+    Type:selectedValue,
+    UID:gen_ID()
   });
 };
 let addnodeItem = (stitle,snote) => {
@@ -118,6 +126,7 @@ let addnodeItem = (stitle,snote) => {
     secure_name: stitle,
     secure_note: noteE,
     Type:selectedValue,
+    UID:gen_ID()
   });
   
 };

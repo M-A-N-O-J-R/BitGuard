@@ -21,19 +21,25 @@ import firebase from '../firebase/fire'
 
 
 export default  AppList= ({item}) => {
-  {/*const ref=firebase.firestore().collection('records');
-  let deleteCardItem=({item.cardholdername})=>{
-    if(doc().cardholdername==)
-    ref.doc().delete().then(() => {
-      console.log("Document successfully deleted!");
-  }).catch((error) => {
-      console.error("Error removing document: ", error);
-  });
-  };*/}
+  const ref=firebase.firestore().collection('records');
+  
+
   const [modalOpen,setmodalOpen]=useState(false);
           const copyText=(text)=>{
             Clipboard.setString(text);      
           }
+          let handleDelete=()=>
+          {
+            ref.where("UID", "==", item.UID).get().then(function(querySnapshot) 
+            {
+              querySnapshot.forEach(function(doc) 
+              {
+                  doc.ref.delete();
+              });
+            }); 
+            setmodalOpen(false);
+            //console.log(item.UID);
+          };
 //   return (
     // <View >
     //     <TouchableOpacity style={styles.listContainer}>
@@ -51,17 +57,17 @@ export default  AppList= ({item}) => {
            
             <View >
             <TouchableOpacity style={styles.listContainer} onPress={()=>setmodalOpen(true)}>
-              <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
               <Text >{item.Type}:{item.cardholdername}</Text>
-              <TouchableOpacity onPress={()=>{}}>
-          <MaterialCommunityIcons name="delete-outline" size={24} color="dimgrey"/>
-        </TouchableOpacity>
-              </View>
+              
             
             <Modal
                 visible={modalOpen}
                 animationType={'slide'}
                 >
+                  
+                <TouchableOpacity>
+                    <AntDesign name="delete" size={36} color="dimgrey"  onPress={()=>handleDelete()} />
+                </TouchableOpacity>
                 <Ionicons name="close-sharp" size={36} color="dimgrey"  onPress={()=>setmodalOpen(false)} style={{marginLeft:390}}/>
                   <View style={styles.main}>
             <ScrollView vertical={true}>           
@@ -71,7 +77,12 @@ export default  AppList= ({item}) => {
             <Text>Brand : </Text>
             <Text style={styles.itemInput}>{item.cardbrand}</Text>
            <Text>Card Number : </Text>
-           <Text style={styles.itemInput}>{item.number}</Text>
+           <View style={styles.button3}>
+        <Text styles={styles.btnText3}>{item.number}</Text>
+        <TouchableOpacity onPress={()=>{copyText(item.number)}}>
+          <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+        </TouchableOpacity>
+      </View>
             <View style={{flexDirection:'row'}}>
             <Text>Expiry Date : </Text>
             <Text style={{marginLeft:60}}>CVV : </Text>
@@ -97,17 +108,17 @@ export default  AppList= ({item}) => {
            
             <View >
                 <TouchableOpacity style={styles.listContainer} onPress={()=>setmodalOpen(true)}>
-                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                
                 <Text >{item.Type}:{item.Id_Firstname}</Text>
-                <TouchableOpacity onPress={()=>{}}>
-          <MaterialCommunityIcons name="delete-outline" size={24} color="dimgrey"/>
-        </TouchableOpacity>
-        </View>
+                
                 </TouchableOpacity> 
                 <Modal
                 visible={modalOpen}
                 animationType={'slide'}
                 >
+                  <TouchableOpacity>
+                    <AntDesign name="delete" size={36} color="dimgrey"  onPress={()=>handleDelete()} />
+                </TouchableOpacity>
                    <Ionicons name="close-sharp" size={36} color="dimgrey"  onPress={()=>setmodalOpen(false)} style={{marginLeft:390}}/>
                   <View style={styles.main}>
                     <Text style={styles.title}>Personal Details  <Ionicons name="person-circle-outline" size={24} color="black" /></Text>
@@ -119,19 +130,54 @@ export default  AppList= ({item}) => {
             <Text>Last Name : </Text>
             <Text style={styles.itemInput}>{item.Idtitle}</Text>
             <Text>Email : </Text>
-            <Text style={styles.itemInput}>{item.Idemail}</Text>
+            <View style={styles.button3}>
+            <Text styles={styles.btnText3}>{item.Idemail}</Text>
+            <TouchableOpacity onPress={()=>{copyText(item.Idemail)}}>
+            <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+            </TouchableOpacity>
+            </View>
             <Text>Phone : </Text>
-            <Text style={styles.itemInput}>{item.Idphone}</Text>
+            <View style={styles.button3}>
+            <Text styles={styles.btnText3}>{item.Idphone}</Text>
+            <TouchableOpacity onPress={()=>{copyText(item.Idphone)}}>
+            <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+            </TouchableOpacity>
+            </View>
             <Text>AADHAR number : </Text>
-            <Text style={styles.itemInput}>{item.result}</Text>
+            <View style={styles.button3}>
+            <Text styles={styles.btnText3}>{item.result}</Text>
+            <TouchableOpacity onPress={()=>{copyText(item.result)}}>
+            <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+            </TouchableOpacity>
+            </View>
             <Text>Passport number : </Text>
-            <Text style={styles.itemInput}>{item.Idpassport}</Text>
+            <View style={styles.button3}>
+            <Text styles={styles.btnText3}>{item.Idpassport}</Text>
+            <TouchableOpacity onPress={()=>{copyText(item.Idpassport)}}>
+            <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+            </TouchableOpacity>
+            </View>
             <Text>License number : </Text>
-            <Text style={styles.itemInput}>{item.Idlicense}</Text>
+            <View style={styles.button3}>
+            <Text styles={styles.btnText3}>{item.Idlicense}</Text>
+            <TouchableOpacity onPress={()=>{copyText(item.Idlicense)}}>
+            <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+            </TouchableOpacity>
+            </View>
             <Text>Address 1 : </Text>
-            <Text style={styles.itemInput}>{item.address1}</Text>
+            <View style={styles.button3}>
+            <Text styles={styles.btnText3}>{item.address1}</Text>
+            <TouchableOpacity onPress={()=>{copyText(item.address1)}}>
+            <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+            </TouchableOpacity>
+            </View>
             <Text>Address 2 : </Text>
-            <Text style={styles.itemInput}>{item.adress2}</Text>
+            <View style={styles.button3}>
+            <Text styles={styles.btnText3}>{item.address2}</Text>
+            <TouchableOpacity onPress={()=>{copyText(item.address2)}}>
+            <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+            </TouchableOpacity>
+            </View>
             <Text>City/Town : </Text>
             <Text style={styles.itemInput}>{item.card_city}</Text>
             <Text>State/Province : </Text>
@@ -155,17 +201,17 @@ export default  AppList= ({item}) => {
            
             <View >
                 <TouchableOpacity style={styles.listContainer} onPress={()=>setmodalOpen(true)}>
-                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                
                 <Text >{item.Type} : {item.secure_name}</Text>
-                <TouchableOpacity onPress={()=>{}}>
-          <MaterialCommunityIcons name="delete-outline" size={24} color="dimgrey"/>
-        </TouchableOpacity>
-        </View>
+                
                 </TouchableOpacity>   
                 <Modal
                 visible={modalOpen}
                 animationType={'slide'}
                 >
+                  <TouchableOpacity>
+                    <AntDesign name="delete" size={36} color="dimgrey"  onPress={()=>handleDelete()} />
+                </TouchableOpacity>
                 <Ionicons name="close-sharp" size={36} color="dimgrey"  onPress={()=>setmodalOpen(false)} style={{marginLeft:390}}/>
                   <View style={styles.main}>
             <ScrollView vertical={true}>           
@@ -197,19 +243,17 @@ export default  AppList= ({item}) => {
             <View>
               
                 <TouchableOpacity style={styles.listContainer} onPress={()=>setmodalOpen(true)}>
-                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+               
                 <Text >{item.Type}:{item.name}</Text>
-                <TouchableOpacity onPress={()=>{
-                  console.log("pressedd");
-                }}>
-          <MaterialCommunityIcons name="delete-outline" size={24} color="dimgrey"/>
-        </TouchableOpacity>
-        </View>
+                
                 </TouchableOpacity>      
                 <Modal
                 visible={modalOpen}
                 animationType={'slide'}
                 >
+                  <TouchableOpacity>
+                    <AntDesign name="delete" size={36} color="dimgrey"  onPress={()=>handleDelete()} />
+                </TouchableOpacity>
                     <Ionicons name="close-sharp" size={36} color="dimgrey"  onPress={()=>setmodalOpen(false)} style={{marginLeft:390}}/>
                   <View style={styles.main}>
             <ScrollView vertical={true}>           
@@ -217,9 +261,19 @@ export default  AppList= ({item}) => {
             <Text style={{marginTop:10}}>Website/App : </Text>
             <Text style={styles.itemInput}>{item.name}</Text>
             <Text>Username : </Text>
-            <Text style={styles.itemInput}>{item.id}</Text>
+            <View style={styles.button3}>
+            <Text styles={styles.btnText3}>{item.id}</Text>
+            <TouchableOpacity onPress={()=>{copyText(item.id)}}>
+            <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+            </TouchableOpacity>
+            </View>
             <Text>Password : </Text>
-            <Text style={styles.itemInput}>{item.result}</Text>
+            <View style={styles.button3}>
+            <Text styles={styles.btnText3}>{item.result}</Text>
+            <TouchableOpacity onPress={()=>{copyText(item.result)}}>
+            <MaterialCommunityIcons name="content-copy" size={24} color="black"/>
+            </TouchableOpacity>
+            </View>
             <Text>Note  :</Text>    
             <Text style={styles.itemInput}>{item.Note}</Text>        
             </ScrollView>
@@ -341,7 +395,7 @@ const styles = StyleSheet.create({
   {
     padding:10,
     alignItems:'center',
-    width:'80%',
+    width:'94%',
     borderRadius:5,
     backgroundColor:'lavender',
     flexDirection:'row',
@@ -351,8 +405,8 @@ const styles = StyleSheet.create({
     borderBottomRightRadius:10,
     borderTopRightRadius:10,
     borderWidth: 1,
-    marginLeft :40,
-    height:"10%"
+    marginLeft :13,
+    height:"9.3%"
     
   },
   main: {
@@ -376,4 +430,9 @@ const styles = StyleSheet.create({
     width:"90%",
     textAlign:'center'
   },
+  copy:{
+    flexDirection:'row',
+    //justifyContent:'flex-start',
+    alignItems:'center',
+  }
 });
