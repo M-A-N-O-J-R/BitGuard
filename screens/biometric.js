@@ -57,49 +57,36 @@ const LocalAuth=({navigation})=>{
        };
 
     return(
-        
-        <ImageBackground source={require('../assets/bg13.png')} style={styles.container}>
-                           <View style={{flexDirection:'row'}}>
-
-            <TouchableOpacity onPress={ ()=>scanFingerprint()}>
+        <View style={{flex:1,backgroundColor:'#FFFFFF'}}>
+                <Image source={require('../assets/splash.gif')} style={styles.img}></Image>
+                <TouchableOpacity style={styles.button} onPress={ ()=>scanFingerprint()}>
                 {/* <Text allowFontScaling={ false }>SCAN</Text> */}
-                <Text  allowFontScaling={ false } style={{fontFamily:'Merriweather_400Regular_Italic', backgroundColor:'black',color:'white',borderRadius:6,fontSize:30,padding:15,alignItems:'center',justifyContent:'center'}}>Enter
-                
+                <Text  style={{color:'white',fontSize:30,fontFamily:'Merriweather_400Regular_Italic'}} allowFontScaling={ false } >Enter
                 </Text>
-            <Ionicons name={'arrow-forward-circle'} color={'black'} size={40}/>
-            
             </TouchableOpacity>
-            </View>
-        </ImageBackground>
+        </View>
     )
 }
 
 export default LocalAuth;
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        backgroundColor:"lavender",
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    fingerPrint: {
-        flex:1,
+    img:{
+        marginTop:230,
+        height:400,
+        width:"100%",
         justifyContent:'center',
-        alignItems: "center",
+        alignItems:'center'
+    },
+    button:{
+        height:60,
+        width:150,
+        backgroundColor:'black',
+        color:'white',
         alignContent:'center',
-        marginTop: 25,
-        backgroundColor:'red'
-    },
-    fpImage: {
-        alignSelf: "center",
-        marginBottom: 8
-    },
-    
-    fpText: {
-        fontFamily: "pl",
-        fontSize: 15,
-        color: "#341931"
-    },
-    
+        alignItems:'center',
+        justifyContent:'center',
+        marginLeft:140,
+        borderRadius:10,
+    }
 });
