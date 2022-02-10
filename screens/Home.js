@@ -9,7 +9,7 @@ import { Feather,AntDesign,Ionicons } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import Records from './Records';
 import Generate from './Generate';
-
+import SettingsScreen from './SettingsScreen';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
@@ -41,14 +41,6 @@ function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
     </View>
   );
 }
@@ -165,7 +157,9 @@ export default function App({navigation,route}) {
             <AntDesign name="setting" size={24} color="black" />
            )
          }}
-        component={SettingsScreen} />
+         >
+           {()=> <SettingsScreen/>}
+         </Tab.Screen>
        
       </Tab.Navigator>
     </NavigationContainer>):(<AppIntroSlider
